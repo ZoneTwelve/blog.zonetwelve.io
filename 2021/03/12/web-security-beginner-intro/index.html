@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zonetwelve.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Web security intro為什麼我會寫這篇文章因緣際會下，我這年會協助 NCtfU 教學一些基礎的資安課程技巧，接著就會是一些學習、分析、利用 Web 方面的 Vulnerability。基於現在社群上使用的程式語言不僅僅考驗前端、後端語言，有時候也會考慮到使用的 Modules、Binary、Algroithm…等等的延伸物。所以…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web Security beginner">
+<meta property="og:url" content="https://zonetwelve.io/2021/03/12/web-security-beginner-intro/index.html">
+<meta property="og:site_name" content="ZoneTwelveDev">
+<meta property="og:description" content="Web security intro為什麼我會寫這篇文章因緣際會下，我這年會協助 NCtfU 教學一些基礎的資安課程技巧，接著就會是一些學習、分析、利用 Web 方面的 Vulnerability。基於現在社群上使用的程式語言不僅僅考驗前端、後端語言，有時候也會考慮到使用的 Modules、Binary、Algroithm…等等的延伸物。所以…">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-03-12T03:47:37.000Z">
+<meta property="article:modified_time" content="2021-03-13T12:31:35.674Z">
+<meta property="article:author" content="ZoneTwelve">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://zonetwelve.io/2021/03/12/web-security-beginner-intro/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-tw'
+  };
+</script>
+
+  <title>Web Security beginner | ZoneTwelveDev</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ZoneTwelveDev</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
+    <link itemprop="mainEntityOfPage" href="https://zonetwelve.io/2021/03/12/web-security-beginner-intro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ZoneTwelve">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZoneTwelveDev">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Web Security beginner
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-03-12 11:47:37" itemprop="dateCreated datePublished" datetime="2021-03-12T11:47:37+08:00">2021-03-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-13 20:31:35" itemprop="dateModified" datetime="2021-03-13T20:31:35+08:00">2021-03-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Web-security-intro"><a href="#Web-security-intro" class="headerlink" title="Web security intro"></a>Web security intro</h1><h2 id="為什麼我會寫這篇文章"><a href="#為什麼我會寫這篇文章" class="headerlink" title="為什麼我會寫這篇文章"></a>為什麼我會寫這篇文章</h2><p><code>因緣際會下，我這年會協助 NCtfU 教學一些基礎的資安課程技巧，接著就會是一些學習、分析、利用 Web 方面的 Vulnerability。</code><br>基於現在社群上使用的程式語言不僅僅考驗前端、後端語言，有時候也會考慮到使用的 Modules、Binary、Algroithm…等等的延伸物。所以…</p>
+<span id="more"></span>
+<p>這都是考驗技術的知識含量，部份情況可以透過猥瑣的姿勢繞過，當你越猥瑣就越能抓漏。</p>
+<h2 id="如何入門"><a href="#如何入門" class="headerlink" title="如何入門"></a>如何入門</h2><p><code>目前市面上有許多框架，但是在台灣許多的企業、政府單位、學校都是奴役於 php、java、.net 等等語言，這樣要研究的領域會多多少少的減少，可以鑽研的變多，但也不代表會很輕鬆簡單，接著我會講解一些歷年各種網站曾出現的漏洞</code><br><small>曾經出現不代表現在就沒有 ：P</small></p>
+<h3 id="From-OWASP-Top-10-2020-of-Top-3"><a href="#From-OWASP-Top-10-2020-of-Top-3" class="headerlink" title="From OWASP Top 10 (2020) of Top 3"></a>From OWASP Top 10 (2020) of Top 3</h3><blockquote>
+<p>此處可簡單閱讀即可，透過已知漏洞類型可以協助你透過這些邏輯去挖掘問題。</p>
+</blockquote>
+<ol>
+<li>Injection</li>
+</ol>
+<ul>
+<li>SQL Injection<br>SQL 是網站中非常良好的資料庫架構，所以許多網站會利用 SQL 作為資料管理的媒介，如果程式邏輯、權限配置、環境架構只要出現問題，sQL 都可以是拿下整個伺服器的方法。</li>
+</ul>
+<ol start="2">
+<li>Broken Authemtication</li>
+</ol>
+<ul>
+<li>自動化攻擊 (Automated attack)<br>這類攻擊可以使攻擊者利用時間換取存取權限的方式，例如說：brute force 來取得某個使用者的權限。</li>
+<li>預設密碼   (Default password)<br>安全意識薄弱往往成為防禦缺口，使用者不修改預設密碼的話，攻擊者可以直接拿下設備並做後續的利用。</li>
+<li>弱密碼保護 (Weak password protection)<br>此處的 <strong>弱密碼保護</strong> 是指密碼保存的方式以及密碼強度兩點，如果密碼儲存利用 弱hash 甚至是明文的話，都可能被攻擊者利用相關漏洞繞過。</li>
+<li>任意存取的權限 (Exposes session IDs in the URL) → URL rewriting<br>有些服務可能會將 token、session 寫在網址上，例如說 <code>https://example.com/service?func=1&amp;sess=7c025027...</code><br>若該 session/token 可以用於其他服務或者任意修改的後，可以被利用的話，這就是 <strong>URL rewriting</strong> 或者 <strong>存取權缺陷</strong></li>
+</ul>
+<ol start="3">
+<li>敏感資訊洩漏 (Sensitive Data Exposure) (Information leakage)</li>
+</ol>
+<ul>
+<li>Leakage of application’s directory or folder path<br>如果伺服器包含其他漏洞，資訊洩漏有時會造成更危險的傷害，例如說配合 LFI 就可能下在任意檔案，進而存取或挖掘其他漏洞或資訊。</li>
+</ul>
+<ol start="4">
+<li>…<br>…</li>
+</ol>
+<h1 id="Get-started"><a href="#Get-started" class="headerlink" title="Get started"></a>Get started</h1><select name="category">
+  <option selected="" disabled="" value="" hidden="">HITCON Zeroday 漏洞列表</option>
+  <optgroup label="網頁應用程式漏洞">
+    <option value="1">資料庫注入攻擊 (SQL Injection)</option>
+    <option value="2">指令注入攻擊 (Command Injection)</option>
+    <option value="3">HTTP Header 注入 (HTTP Header Injection)</option>
+    <option value="4">反射型跨站腳本攻擊 (Reflected Cross-Site Scripting)</option>
+    <option value="5">預存式跨站腳本攻擊 (Stored Cross-Site Scripting)</option>
+    <option value="6">基於 DOM 的 XSS (DOM-based Cross-Site Scripting)</option>
+    <option value="7">基於 Flash 的 XSS (Flash Cross-Site Scripting)</option>
+    <option value="8">跨站冒名請求 (Cross-Site Request Forgery, CSRF)</option>
+    <option value="9">本地檔案引入 (Local File Inclusion, LFI)</option>
+    <option value="10">任意檔案上傳 (Arbitrary File Upload)</option>
+    <option value="11">資訊洩漏 (Information Leakage)</option>
+    <option value="12">邏輯漏洞 (Logic Flaws)</option>
+    <option value="13">權限提升 (Privilege Escalation)</option>
+    <option value="14">未驗證的 URL 轉址 (Unvalidated Redirects and Forwards)</option>
+    <option value="15">程式碼執行 (Code Execution)</option>
+    <option value="16">ClickJacking (ClickJacking)</option>
+    <option value="17">遠端檔案引入 (Remote File Inclusion)</option>
+    <option value="18">使用已知含漏洞之元件 (Using Known Vulnerable Components)</option>
+    <option value="19">其他 (Other)</option>
+    <option value="47">遠端命令執行 (Remote Code Execution)</option>
+    <option value="48">弱密碼 (Weak Passwords)</option>
+    <option value="49">任意檔案下載 (Arbitrary File Download)</option>
+    <option value="50">不安全的直接存取物件 (Insecure Direct Object References, IDOR)</option>
+    <option value="51">存取控制缺陷 (Broken Access Control)</option>
+    <option value="52">Server-Side Request Forgery (SSRF)</option>
+    <option value="53">XML 外部實體注入 (XML External Entities (XXE))</option>
+  </optgroup>
+  <optgroup label="行動應用程式漏洞">
+    <option value="20">Android 元件權限漏洞 (Android Component Permission Flaws)</option>
+    <option value="21">釣魚欺騙 (Phishing)</option>
+    <option value="22">資訊洩漏 (Information Leakage)</option>
+    <option value="23">跨站腳本攻擊 (Cross-Site Scripting)</option>
+    <option value="24">惡意程式碼執行 (Malicious Code Execution)</option>
+    <option value="25">邏輯漏洞 (Logic Flaws)</option>
+    <option value="26">其他 (Other)</option>
+  </optgroup>
+  <optgroup label="伺服器漏洞">
+    <option value="27">開放危險連接埠 (Discovered Dangerous Opening Port)</option>
+    <option value="28">遠端執行任意指令 (Arbitrary Command Execution)</option>
+    <option value="29">阻斷服務 (DoS)</option>
+    <option value="30">疑似遭入侵 (Probably Hacked)</option>
+    <option value="31">使用含已知漏洞之元件 (Using Known Vulnerable Components)</option>
+    <option value="32">其他 (Other)</option>
+  </optgroup>
+  <optgroup label="桌上型應用程式漏洞">
+    <option value="33">跨站腳本攻擊 (Cross-Site Scripting)</option>
+    <option value="34">DLL 劫持 (DLL Hijacking)</option>
+    <option value="35">惡意程式碼執行 (Malicious Code Execution)</option>
+    <option value="36">溢位攻擊 (Overflow)</option>
+    <option value="37">Use-After-Free (UAF)</option>
+    <option value="38">雙重釋放 (Double-Free)</option>
+    <option value="39">資訊洩漏 (Information Leakage)</option>
+    <option value="40">邏輯漏洞 (Logic Flaws)</option>
+    <option value="41">垂直權限提升 / 繞過 (Privilege Escalation)</option>
+    <option value="42">阻斷服務攻擊 (DoS)</option>
+    <option value="43">數組越界訪問 (Out-of-bounds Array Access)</option>
+    <option value="44">Kernel 提權 (Kernel Privilege Escalation)</option>
+    <option value="45">其他 (Other)</option>
+  </optgroup>
+  <optgroup label="硬體漏洞">
+    <option value="46">其他 (Other)</option>
+  </optgroup>
+</select>
+
+<ol>
+<li>SQL Injection<br>因為後端應用程式未妥當處理請求內容造成的資料庫命令注入</li>
+<li>Command Injection</li>
+</ol>
+<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><h2 id="picoCTF-2019-Web"><a href="#picoCTF-2019-Web" class="headerlink" title="picoCTF 2019 (Web)"></a>picoCTF 2019 (Web)</h2><p><code>由於 PicoCTF 是提供給 高中生 的大型網路競賽，所以題目都會偏入門，其目的就是讓大家正確的研究環境。</code><br><em><strong>所有題目建議自己解過再點開解法。</strong></em><br><a target="_blank" rel="noopener" href="https://2019game.picoctf.com/">PicoCTF 連結</a></p>
+<ol>
+<li>Insp3ct0r<blockquote>
+<p>網頁測試的工具入門 </p>
+<details>
+<summary>解法</summary>
+ 使用 **view-source** 或者 **右鍵 > inspect** 找到 HTML、JS、CSS 三個分段的 flag 就是答案了。
+</details></blockquote>
+</li>
+</ol>
+<h2 id="Bamboofox-Open-Course"><a href="#Bamboofox-Open-Course" class="headerlink" title="Bamboofox Open Course"></a>Bamboofox Open Course</h2><p><a target="_blank" rel="noopener" href="https://bamboofox.cs.nctu.edu.tw/">Bamboofox CTF Course</a></p>
+<ol>
+<li>train &gt; <a target="_blank" rel="noopener" href="https://bamboofox.cs.nctu.edu.tw/courses/1/challenges/14">AIS3 Web1</a><blockquote>
+<p>這題是一個 LFI，透過查看所有網頁的結果發現 <strong>page={func}</strong> 都是指向同一層目錄的 php </p>
+<details>
+<summary>解法：</summary>
+ https://{server}/?page=about → https://{server}/about.php，<br>
+ 這是考驗使用者開發 php 的經驗。<br>
+ 也就是 php wrapper，flag 也會跟你說 <span class="github-emoji" alias="stuck_out_tongue_winking_eye" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f61c.png?v8">&#x1f61c;</span>
+</details></blockquote>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Web-security-intro"><span class="nav-number">1.</span> <span class="nav-text">Web security intro</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E6%88%91%E6%9C%83%E5%AF%AB%E9%80%99%E7%AF%87%E6%96%87%E7%AB%A0"><span class="nav-number">1.1.</span> <span class="nav-text">為什麼我會寫這篇文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%85%A5%E9%96%80"><span class="nav-number">1.2.</span> <span class="nav-text">如何入門</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#From-OWASP-Top-10-2020-of-Top-3"><span class="nav-number">1.2.1.</span> <span class="nav-text">From OWASP Top 10 (2020) of Top 3</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Get-started"><span class="nav-number">2.</span> <span class="nav-text">Get started</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example"><span class="nav-number">3.</span> <span class="nav-text">Example</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#picoCTF-2019-Web"><span class="nav-number">3.1.</span> <span class="nav-text">picoCTF 2019 (Web)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bamboofox-Open-Course"><span class="nav-number">3.2.</span> <span class="nav-text">Bamboofox Open Course</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ZoneTwelve</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZoneTwelve</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
