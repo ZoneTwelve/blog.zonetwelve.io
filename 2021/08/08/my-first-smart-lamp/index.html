@@ -16,8 +16,9 @@
 <meta property="og:image" content="https://zonetwelve.io/2021/08/08/my-first-smart-lamp/IoT-Service-Structure.png">
 <meta property="og:image" content="https://zonetwelve.io/2021/08/08/my-first-smart-lamp/iot-device-preview-1.jpg">
 <meta property="og:image" content="https://zonetwelve.io/2021/08/08/my-first-smart-lamp/IoTUnit-FSM.png">
+<meta property="og:image" content="https://zonetwelve.io/2021/08/08/my-first-smart-lamp/desktop-with-lamp.jpg">
 <meta property="article:published_time" content="2021-08-08T14:53:36.000Z">
-<meta property="article:modified_time" content="2021-08-08T16:46:23.013Z">
+<meta property="article:modified_time" content="2021-08-08T17:00:58.422Z">
 <meta property="article:author" content="ZoneTwelve">
 <meta property="article:tag" content="IoT Arduino Node.js">
 <meta name="twitter:card" content="summary">
@@ -123,6 +124,7 @@
 <li>接收到 Button 的 press 訊號<br>如果是透過 TCP Server 收到 Control signal 則透過 <code>SET $&#123;value&#125;</code> 的 value 設定狀態<br>反之是透過按鈕接收到控制訊號，我的 LED control modules 可以直接執行 <code>light.opposite()</code> 進行開/關燈</li>
 </ol>
 <h4 id="燈具控制模組-Light-control-modules"><a href="#燈具控制模組-Light-control-modules" class="headerlink" title="燈具控制模組 Light control modules"></a>燈具控制模組 Light control modules</h4><p>  其實就是儲存一堆變數的地方 ouo</p>
+<h1 id="當前成果"><a href="#當前成果" class="headerlink" title="當前成果"></a>當前成果</h1><p><img src="desktop-with-lamp.jpg" alt="我的桌面 &lt;3"></p>
 <h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>大致上開發很多都花在思考跟確定開發方向是容易更改或者擴充的，實際上架構很簡單，照著設計圖做應該都不會有任何問題吧..?<br>有很多地方可以加上 Security protection ，但是為了講求 <strong>最小可行性方案</strong> ，所以先進行了一定程度的忽略安全行機制。<br>我完全沒想到 hardware 的部份可以講到這個多東西，就東拼拼西湊湊的東西。<br>實際上可以討論的細節很多，例如說原理、架構、安全性 bala bala<br>所以我就只好先寫到 hardware 的部份就先 publish 啦 ♡</p>
 <h1 id="未來設計方向-IoT-device-kernel-idea"><a href="#未來設計方向-IoT-device-kernel-idea" class="headerlink" title="未來設計方向 IoT device kernel (idea)"></a>未來設計方向 IoT device kernel (idea)</h1><p>因為我開發時發現 Arduino 的流程不太適合我整套系統的運行，所以我正在思考要設計一個 kernel library，供小型的 Project 接上我的 Central Server，只不過 Central Server 的 UI/IoT API 都還沒設計好的前提下，應該不是最要緊的功能。</p>
 <h1 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code:"></a>Source Code:</h1><p><a target="_blank" rel="noopener" href="https://github.com/ZoneTwelve/IoT-Management-Unit">Central Server</a><br><a href="javascript:alert('not yet')">IoT Unit</a></p>
