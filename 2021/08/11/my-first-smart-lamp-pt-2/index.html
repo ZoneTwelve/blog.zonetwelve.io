@@ -4,15 +4,25 @@
   <meta charset="utf-8">
   
   
-  <title>ZoneTwelve Dev</title>
+  <title>My first smart lamp [pt.2][Web] | ZoneTwelve Dev</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="ZoneTwelve Dev">
-<meta property="og:url" content="https://zonetwelve.io/index.html">
+  <meta name="description" content="簡介 Intro續前文 My first smart lamp[pt.1][hardware] 我們知道 hardware 的架構已經是如何被設計的了，所以下一步就是透過媒合兩個服務，接著就會介紹透過 TCP &#x2F; HTTP 等方式去搭建兩個服務的連線並提供即時控制與狀態的取得，廢話少說開始進入正題。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="My first smart lamp [pt.2][Web]">
+<meta property="og:url" content="https://zonetwelve.io/2021/08/11/my-first-smart-lamp-pt-2/index.html">
 <meta property="og:site_name" content="ZoneTwelve Dev">
+<meta property="og:description" content="簡介 Intro續前文 My first smart lamp[pt.1][hardware] 我們知道 hardware 的架構已經是如何被設計的了，所以下一步就是透過媒合兩個服務，接著就會介紹透過 TCP &#x2F; HTTP 等方式去搭建兩個服務的連線並提供即時控制與狀態的取得，廢話少說開始進入正題。">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://zonetwelve.io/2021/08/11/my-first-smart-lamp-pt-2/IoT-Service-Structure-Serverside.jpg">
+<meta property="og:image" content="https://zonetwelve.io/2021/08/11/my-first-smart-lamp-pt-2/front-end-sample.png">
+<meta property="article:published_time" content="2021-08-11T12:32:20.000Z">
+<meta property="article:modified_time" content="2021-08-11T13:56:43.063Z">
 <meta property="article:author" content="ZoneTwelve">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="Web">
+<meta property="article:tag" content="IoT">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zonetwelve.io/2021/08/11/my-first-smart-lamp-pt-2/IoT-Service-Structure-Serverside.jpg">
   
     <link rel="alternate" href="/atom.xml" title="ZoneTwelve Dev" type="application/atom+xml">
   
@@ -69,9 +79,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-my-first-smart-lamp-pt-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-my-first-smart-lamp-pt-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/08/11/my-first-smart-lamp-pt-2/" class="article-date">
   <time class="dt-published" datetime="2021-08-11T12:32:20.000Z" itemprop="datePublished">2021-08-11</time>
@@ -84,8 +92,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/08/11/my-first-smart-lamp-pt-2/">My first smart lamp [pt.2][Web]</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      My first smart lamp [pt.2][Web]
     </h1>
   
 
@@ -94,11 +102,25 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <h1 id="簡介-Intro"><a href="#簡介-Intro" class="headerlink" title="簡介 Intro"></a>簡介 Intro</h1><p>續前文 <a href="/2021/08/08/my-first-smart-lamp">My first smart lamp[pt.1][hardware]</a> 我們知道 hardware 的架構已經是如何被設計的了，所以下一步就是透過媒合兩個服務，接著就會介紹透過 TCP / HTTP 等方式去搭建兩個服務的連線並提供即時控制與狀態的取得，廢話少說開始進入正題。</p>
-        
-          <p class="article-more-link">
-            <a href="/2021/08/11/my-first-smart-lamp-pt-2/#more">Read More</a>
-          </p>
-        
+<span id="more"></span>
+<h1 id="架構-Structure"><a href="#架構-Structure" class="headerlink" title="架構 Structure"></a>架構 Structure</h1><p>繼上篇架構 我們接著就是要做 Central Server 所有可能的元件。</p>
+<ul>
+<li>Management Unit (for IoT Unit)</li>
+<li>UI Service (for User)</li>
+<li>API (for user get access from Management Unit)</li>
+</ul>
+<p><img src="IoT-Service-Structure-Serverside.jpg" alt="Server side block"></p>
+<h2 id="Node-js-Server"><a href="#Node-js-Server" class="headerlink" title="Node.js Server"></a>Node.js Server</h2><p>目前我使用 Express 以及 Native HTML/CSS/JS 進行雛型的設計，為了進行最大程度的模組化以便未來擴充或者修改整個軟體架構，因此採用了以上的設計。</p>
+<h3 id="UI-Service"><a href="#UI-Service" class="headerlink" title="UI Service"></a>UI Service</h3><p>其實不用我多說架構就是透過 <code>app.use(&quot;/service&quot;, ui_service);</code> 將前端的服務直接提供給使用者，為了加強使用者體驗，可以搭配 <strong>PWA</strong> (Progrssive Web Application) 讓使用者可以在低網路能力的情況下操控設備。<br>目前我簡單的建構了一個 home page<br><img src="front-end-sample.png" alt="範本前端"><br>簡簡單單的一個界面，簡單的使用 fetch 寫了一個取得所有裝置（<del>偷懶</del>）以及生成控制元件的 JS</p>
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><p>因為操作設備可以簡單分為簡種可能，[GET] 取得資源、[POST] 新增資源、[PUT] 修改資源、[DELETE] 移除資源，聰明如雪你的可能注意到了，這就是 <strong>RESTful API</strong>，所以我們可以簡單根據裝置、使用者需要的操作設計 API。</p>
+<h4 id="API-Sample"><a href="#API-Sample" class="headerlink" title="API Sample"></a>API Sample</h4><ul>
+<li>[GET] /devices # 取得裝置清單<br><small>目前是直接將所有設備設為所有人可以存取，所以還沒有其他的 method。</small></li>
+<li>[GET] /status  # 取得裝置的狀態</li>
+<li>[PUT] /status  # 修改裝置的狀態<br><small>其實我偷懶把 POST 寫成 PUT，因為 status 不需要 POST</small></li>
+</ul>
+<h3 id="Management-Unit"><a href="#Management-Unit" class="headerlink" title="Management Unit"></a>Management Unit</h3><p>目前為了方便測試裝置，現在採用 TCP (建議使用 TCP Connection with SSL/TLS)，並設計簡單的指令集，至於為什麼不使用 MQTT 最主要的理由就是降低開發成本，因為我打算重頭設計整套 IoT Service。(<del>絕對不是因為我偷懶</del>)<br>理想上應該將 Management Unit 的服務另外寫再其他的地方，而不是合併在同一個 Server，因為可以增加服務的彈性以及相關的安全性。</p>
+<h1 id="Open-Source"><a href="#Open-Source" class="headerlink" title="Open Source"></a>Open Source</h1><p><a target="_blank" rel="noopener" href="https://github.com/ZoneTwelve/IoT-Control-Unit-Sample">Hardware SoureCode</a><br><a target="_blank" rel="noopener" href="https://github.com/ZoneTwelve/IoT-Management-Unit">Server SourceCode</a></p>
+
       
     </div>
     <footer class="article-footer">
@@ -111,107 +133,19 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-my-first-smart-lamp" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/08/08/my-first-smart-lamp/" class="article-date">
-  <time class="dt-published" datetime="2021-08-08T14:53:36.000Z" itemprop="datePublished">2021-08-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/08/08/my-first-smart-lamp/">My first smart lamp [pt.1][hardware]</a>
-    </h1>
+    <a href="/2021/08/08/my-first-smart-lamp/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">My first smart lamp [pt.1][hardware]</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="簡介-Intro"><a href="#簡介-Intro" class="headerlink" title="簡介 Intro"></a>簡介 Intro</h1><p>每一篇好的文章都有一個好的架構就跟 Project 一樣，如果想讓整個 Project 開發快速就需要先設計好架構，好的架構才能夠開發得流暢。<br>我簡單來提供我系統的架構，廢話少說先上圖。</p>
-        
-          <p class="article-more-link">
-            <a href="/2021/08/08/my-first-smart-lamp/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zonetwelve.io/2021/08/08/my-first-smart-lamp/" data-id="cks7h9rvx0008eddjcj33hfom" data-title="My first smart lamp [pt.1][hardware]" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Arduino/" rel="tag">Arduino</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IoT/" rel="tag">IoT</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/08/08/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2021-08-08T13:29:10.487Z" itemprop="datePublished">2021-08-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/08/08/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zonetwelve.io/2021/08/08/hello-world/" data-id="cks7h9rvw0007eddjag1g0o9s" data-title="Hello World" class="article-share-link">Teilen</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
 </section>
