@@ -2,10 +2,11 @@
 title: My first smart lamp [pt.2][Web]
 date: 2021-08-11 20:32:20
 tags:
- - Node.js
- - Web
- - IoT
- - 創客
+  - Node.js
+  - Web
+  - IoT
+  - 創客
+  - my-first-smart-lamp
 ---
 # 簡介 Intro
 續前文 [My first smart lamp[pt.1][hardware]](/2021/08/08/my-first-smart-lamp) 我們知道 hardware 的架構已經是如何被設計的了，所以下一步就是透過媒合兩個服務，接著就會介紹透過 TCP / HTTP 等方式去搭建兩個服務的連線並提供即時控制與狀態的取得，廢話少說開始進入正題。

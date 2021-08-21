@@ -5,6 +5,7 @@ tags:
   - IoT 
   - Arduino 
   - 創客
+  - my-first-smart-lamp
 ---
 
 # 簡介 Intro
