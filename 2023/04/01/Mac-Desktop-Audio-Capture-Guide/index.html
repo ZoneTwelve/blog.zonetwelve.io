@@ -4,15 +4,30 @@
   <meta charset="utf-8">
   
   
-  <title>Tag: Arduino | ZoneTwelve Dev</title>
+  <title>Mac (M1/M2) 電腦音效擷取指南 | ZoneTwelve Dev</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="ZoneTwelve Dev">
-<meta property="og:url" content="https://zonetwelve.io/tags/Arduino/index.html">
+  <meta name="description" content="介紹使用 Mac 的各位可能會注意到 OBS 沒辦法直接擷取電腦音效，所以這篇文章就是要教各位如何設定才能擷取電腦音效。 在 MacOS 13 Ventura 擷取音效如果使用 OBS Studio 28 版以上的同學們會注意到擷取到電腦的桌面音效或者單一的應用程式音效，其他的一律都沒聲音。或者是你成功把音效加入 Audio Mixer, 但是視窗隱藏之後就會沒聲音。 這次我們會用一個虛擬音訊輸入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac (M1&#x2F;M2) 電腦音效擷取指南">
+<meta property="og:url" content="https://zonetwelve.io/2023/04/01/Mac-Desktop-Audio-Capture-Guide/index.html">
 <meta property="og:site_name" content="ZoneTwelve Dev">
+<meta property="og:description" content="介紹使用 Mac 的各位可能會注意到 OBS 沒辦法直接擷取電腦音效，所以這篇文章就是要教各位如何設定才能擷取電腦音效。 在 MacOS 13 Ventura 擷取音效如果使用 OBS Studio 28 版以上的同學們會注意到擷取到電腦的桌面音效或者單一的應用程式音效，其他的一律都沒聲音。或者是你成功把音效加入 Audio Mixer, 但是視窗隱藏之後就會沒聲音。 這次我們會用一個虛擬音訊輸入">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://zonetwelve.io/2023/04/01/Mac-Desktop-Audio-Capture-Guide/audio-midi-setup-open.png">
+<meta property="og:image" content="https://zonetwelve.io/2023/04/01/Mac-Desktop-Audio-Capture-Guide/midi-setup-panel.png">
+<meta property="og:image" content="https://zonetwelve.io/2023/04/01/Mac-Desktop-Audio-Capture-Guide/create-multi-output-deivce.png">
+<meta property="og:image" content="https://zonetwelve.io/2023/04/01/Mac-Desktop-Audio-Capture-Guide/midi-select.png">
+<meta property="og:image" content="https://zonetwelve.io/2023/04/01/Mac-Desktop-Audio-Capture-Guide/select-mo.png">
+<meta property="og:image" content="https://zonetwelve.io/2023/04/01/Mac-Desktop-Audio-Capture-Guide/obs-config.png">
+<meta property="article:published_time" content="2023-04-01T02:32:36.000Z">
+<meta property="article:modified_time" content="2023-04-01T05:55:54.280Z">
 <meta property="article:author" content="ZoneTwelve">
+<meta property="article:tag" content="Mac">
+<meta property="article:tag" content="MacOS 13 Ventura">
+<meta property="article:tag" content="OBS">
+<meta property="article:tag" content="Audio">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zonetwelve.io/2023/04/01/Mac-Desktop-Audio-Capture-Guide/audio-midi-setup-open.png">
   
     <link rel="alternate" href="/atom.xml" title="ZoneTwelve Dev" type="application/atom+xml">
   
@@ -69,39 +84,82 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/08/08/my-first-smart-lamp/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-08-08T14:53:36.000Z" itemprop="datePublished">8月 8</time>
+        <section id="main"><article id="post-Mac-Desktop-Audio-Capture-Guide" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/04/01/Mac-Desktop-Audio-Capture-Guide/" class="article-date">
+  <time class="dt-published" datetime="2023-04-01T02:32:36.000Z" itemprop="datePublished">2023-04-01</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/08/my-first-smart-lamp/">My first smart lamp [pt.1][Hardware]</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      Mac (M1/M2) 電腦音效擷取指南
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h1><p>使用 Mac 的各位可能會注意到 OBS 沒辦法直接擷取電腦音效，所以這篇文章就是要教各位如何設定才能擷取電腦音效。</p>
+<h2 id="在-MacOS-13-Ventura-擷取音效"><a href="#在-MacOS-13-Ventura-擷取音效" class="headerlink" title="在 MacOS 13 Ventura 擷取音效"></a>在 MacOS 13 Ventura 擷取音效</h2><p>如果使用 OBS Studio 28 版以上的同學們會注意到擷取到電腦的桌面音效或者單一的應用程式音效，其他的一律都沒聲音。<br>或者是你成功把音效加入 Audio Mixer, 但是視窗隱藏之後就會沒聲音。</p>
+<p>這次我們會用一個虛擬音訊輸入輸出工具，叫做 BlockHold。</p>
+<h1 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h1><span id="more"></span>
+
+<h2 id="BlackHole"><a href="#BlackHole" class="headerlink" title="BlackHole"></a>BlackHole</h2><p>BlockHole 是透過錄製內部音效的工具再傳入虛擬介面卡的，它會需要手動設定你想擷取的音效內容，因此我們會需要做一些設定。</p>
+<ol>
+<li><p>下載 <a target="_blank" rel="noopener" href="https://existential.audio/blackhole/">BlockHole 16ch</a></p>
+<ul>
+<li>或者使用 <code>brew install blackhole-16ch</code></li>
+</ul>
+</li>
+<li><p>打開 audio MIDI Setup<br> <img src="audio-midi-setup-open.png" alt="audio MIDI Setup"></p>
+</li>
+<li><p>點擊左下方的 + 建立新的 Multi-Output Device<br> <img src="midi-setup-panel.png" alt="MIDI Panel"></p>
+</li>
+<li><p>Create Multi-Output Device<br> <img src="create-multi-output-deivce.png" alt="Create Multi-Output Device"></p>
+</li>
+<li><p>在右邊選單取消選曲 BlockHole 16ch<br> 如果各位有多裝輸入裝置，還可以選擇主要的裝置(Primary Device)<br> <img src="midi-select.png" alt="Select MIDI"></p>
+</li>
+<li><p>關閉 Audio MIDI Setup</p>
+</li>
+<li><p>在系統設定 (System Setting) 修改音源 (Sound) 設定<br> 選擇 Multi-Output Device<br> <img src="select-mo.png" alt="Multi Output Device"></p>
+</li>
+<li><p>修改 OBS [ Setting ⌘+, &gt; Audio &gt; Global Audio Devices &gt; Desktop Audio ]<br> <img src="obs-config.png" alt="OBS Config"></p>
+</li>
+</ol>
+<p>這樣就完成啦<br>有問題的捧U 可以私訊我本人</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zonetwelve.io/2023/04/01/Mac-Desktop-Audio-Capture-Guide/" data-id="clfxdlmfy0000xy5gbb9ggars" data-title="Mac (M1/M2) 電腦音效擷取指南" class="article-share-link">Compartir</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Audio/" rel="tag">Audio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/" rel="tag">Mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MacOS-13-Ventura/" rel="tag">MacOS 13 Ventura</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OBS/" rel="tag">OBS</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/03/31/how-to-build-you-own-home-lab/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Viejo</strong>
+      <div class="article-nav-title">簡單在家建構雲端伺服器</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>
