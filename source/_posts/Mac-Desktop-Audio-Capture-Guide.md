@@ -1,5 +1,5 @@
 ---
-title: Mac (M1/M2) 電腦音效擷取指南
+title: OBS 在 Mac (M1/M2) 電腦音效擷取指南
 date: 2023-04-01 10:32:36
 tags:
  - Mac

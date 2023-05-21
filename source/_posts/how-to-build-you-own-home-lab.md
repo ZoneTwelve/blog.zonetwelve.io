@@ -12,7 +12,7 @@ tags:
 # Proxmox VE
 
 這邊文章會簡單介紹如何(Step-by-step)安裝 Proxmox，想快速入坑的同學可以往下看。
-<img width="500px" src="2023/03/31/how-to-build-you-own-home-lab/proxmox-vm-browser.png" alt="瀏覽器上的 Ubuntu " style="border-radius: 10px;">
+<img width="500px" src="/2023/03/31/how-to-build-you-own-home-lab/proxmox-vm-browser.png" alt="瀏覽器上的 Ubuntu " style="border-radius: 10px;">
 
 ## 介紹
 
