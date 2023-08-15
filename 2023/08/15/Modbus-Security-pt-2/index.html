@@ -14,7 +14,7 @@
 <meta property="og:description" content="引言續先前『Modbus Security Part 1』，我們已經對 PDU 的基礎結構有所認識，這次就將目標鎖定在 ADU，並深入討論 Modbus 資料儲存區的結構。">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2023-08-15T12:13:45.000Z">
-<meta property="article:modified_time" content="2023-08-15T15:07:41.825Z">
+<meta property="article:modified_time" content="2023-08-15T15:11:46.496Z">
 <meta property="article:author" content="ZoneTwelve">
 <meta property="article:tag" content="Modbus">
 <meta property="article:tag" content="Security">
@@ -103,13 +103,17 @@
 <h1 id="Modbus"><a href="#Modbus" class="headerlink" title="Modbus"></a>Modbus</h1><h2 id="ADU"><a href="#ADU" class="headerlink" title="ADU"></a>ADU</h2><p>ADU (Application Data Unit)，是應用程式交換資料的完整封包，ADU 也會因為不同的協議基礎，進而有些微差異，接著就要來說說有常用的架構。</p>
 <p>除了Modbus 的 PDU 核心定義的功能以外，根據不同資料也可以包含其指定的內容。</p>
 <h3 id="常見的架構"><a href="#常見的架構" class="headerlink" title="常見的架構"></a>常見的架構</h3><ul>
-<li>常見的 ADU 類型</li>
+<li>常見的 ADU 類型<ul>
 <li>TCP</li>
 <li>RTU</li>
 <li>ASCII</li>
-<li>常見的通訊模組</li>
+</ul>
+</li>
+<li>常見的通訊模組<ul>
 <li>TCP/IP (Modbus TCP)</li>
 <li>RS485 (Modbus RTU, Modbus ASCII)</li>
+</ul>
+</li>
 </ul>
 <h3 id="ADU-Package"><a href="#ADU-Package" class="headerlink" title="ADU Package"></a>ADU Package</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">+---------------------------------------------+</span><br><span class="line">|  Modbus Application Protocol (MBAP) Header  |</span><br><span class="line">+-------------+----------+---------+----------+</span><br><span class="line">| Transaction | Protocol | Length  |   Unit   |</span><br><span class="line">|  Identifier |Identifier| ......  |Identifier|</span><br><span class="line">+-------------+----------+---------+----------+</span><br><span class="line">|  00  |  01  | 00 | 00  | 00 | 00 |    01    |</span><br><span class="line">+-------------+----------+---------+----------+</span><br><span class="line">|   2 Bytes   | 2 Bytes  | 2 Bytes | 1 Bytes  | </span><br><span class="line">+---------------------------------------------+</span><br></pre></td></tr></table></figure>
 <p>由前至後</p>
@@ -172,7 +176,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zonetwelve.io/2023/08/15/Modbus-Security-pt-2/" data-id="cllcfu6a600039d5gh6mt59qu" data-title="Modbus Security pt.2" class="article-share-link">Teilen</a>
+      <a data-url="https://zonetwelve.io/2023/08/15/Modbus-Security-pt-2/" data-id="cllcg0bgx0003du5g8scz5ih3" data-title="Modbus Security pt.2" class="article-share-link">Teilen</a>
       
       
       
