@@ -23,12 +23,12 @@ ADU (Application Data Unit)，是應用程式交換資料的完整封包，ADU �
 ### 常見的架構
 
 - 常見的 ADU 類型
- - TCP
- - RTU
- - ASCII
+  - TCP
+  - RTU
+  - ASCII
 - 常見的通訊模組
- - TCP/IP (Modbus TCP)
- - RS485 (Modbus RTU, Modbus ASCII)
+  - TCP/IP (Modbus TCP)
+  - RS485 (Modbus RTU, Modbus ASCII)
 
 ### ADU Package
 ```markdown
