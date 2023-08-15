@@ -4,14 +4,21 @@
   <meta charset="utf-8">
   
   
-  <title>Tag: 創客 | ZoneTwelve Dev</title>
+  <title>Modbus Security pt.2 | ZoneTwelve Dev</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="ZoneTwelve Dev">
-<meta property="og:url" content="https://zonetwelve.io/tags/%E5%89%B5%E5%AE%A2/index.html">
+  <meta name="description" content="引言續先前『Modbus Security Part 1』，我們已經對 PDU 的基礎結構有所認識，這次就將目標鎖定在 ADU，並深入討論 Modbus 資料儲存區的結構。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Modbus Security pt.2">
+<meta property="og:url" content="https://zonetwelve.io/2023/08/15/Modbus-Security-pt-2/index.html">
 <meta property="og:site_name" content="ZoneTwelve Dev">
+<meta property="og:description" content="引言續先前『Modbus Security Part 1』，我們已經對 PDU 的基礎結構有所認識，這次就將目標鎖定在 ADU，並深入討論 Modbus 資料儲存區的結構。">
 <meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2023-08-15T12:13:45.000Z">
+<meta property="article:modified_time" content="2023-08-15T14:06:20.658Z">
 <meta property="article:author" content="ZoneTwelve">
+<meta property="article:tag" content="Modbus">
+<meta property="article:tag" content="Security">
+<meta property="article:tag" content="Infrastructure">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="ZoneTwelve Dev" type="application/atom+xml">
@@ -69,58 +76,124 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/08/11/my-first-smart-lamp-pt-2/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-08-11T12:32:20.000Z" itemprop="datePublished">8月 11</time>
+        <section id="main"><article id="post-Modbus-Security-pt-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/15/Modbus-Security-pt-2/" class="article-date">
+  <time class="dt-published" datetime="2023-08-15T12:13:45.000Z" itemprop="datePublished">2023-08-15</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/11/my-first-smart-lamp-pt-2/">My first smart lamp [pt.2][Web]</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      Modbus Security pt.2
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/08/08/my-first-smart-lamp/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-08-08T14:53:36.000Z" itemprop="datePublished">8月 8</time>
-</a>
+    <div class="e-content article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/08/my-first-smart-lamp/">My first smart lamp [pt.1][Hardware]</a>
-    </h1>
-  
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>續先前<a href="/2023/08/04/Modbus-Security/">『Modbus Security Part 1』</a>，我們已經對 PDU 的基礎結構有所認識，這次就將目標鎖定在 ADU，並深入討論 Modbus 資料儲存區的結構。</p>
+<span id="more"></span>
+<h1 id="Modbus"><a href="#Modbus" class="headerlink" title="Modbus"></a>Modbus</h1><h2 id="ADU"><a href="#ADU" class="headerlink" title="ADU"></a>ADU</h2><p>ADU (Application Data Unit)，是應用程式交換資料的完整封包，ADU 也會因為不同的協議基礎，進而有些微差異，接著就要來說說有常用的架構。</p>
+<p>除了Modbus 的 PDU 核心定義的功能以外，根據不同資料也可以包含其指定的內容。</p>
+<h3 id="常見的架構"><a href="#常見的架構" class="headerlink" title="常見的架構"></a>常見的架構</h3><ul>
+<li>常見的 ADU 類型</li>
+<li>TCP</li>
+<li>RTU</li>
+<li>ASCII</li>
+<li>常見的通訊模組</li>
+<li>TCP/IP (Modbus TCP)</li>
+<li>RS485 (Modbus RTU, Modbus ASCII)</li>
+</ul>
+<h3 id="ADU-Package"><a href="#ADU-Package" class="headerlink" title="ADU Package"></a>ADU Package</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">+---------------------------------------------+</span><br><span class="line">|  Modbus Application Protocol (MBAP) Header  |</span><br><span class="line">+-------------+----------+---------+----------+</span><br><span class="line">| Transaction | Protocol | Length  |   Unit   |</span><br><span class="line">|  Identifier |Identifier| ......  |Identifier|</span><br><span class="line">+-------------+----------+---------+----------+</span><br><span class="line">|  00  |  01  | 00 | 00  | 00 | 00 |    01    |</span><br><span class="line">+-------------+----------+---------+----------+</span><br><span class="line">|   2 Bytes   | 2 Bytes  | 2 Bytes | 1 Bytes  | </span><br><span class="line">+---------------------------------------------+</span><br></pre></td></tr></table></figure>
+<p>由前至後</p>
+<ul>
+<li>TI: 用來辨識傳送與接收封包</li>
+<li>PI: Modbus 固定為 0</li>
+<li>Len:後續資料長度</li>
+<li>UI: Slave 設備的辨識碼 (Slave 1 ~ 247)</li>
+</ul>
+<h3 id="Example-Package"><a href="#Example-Package" class="headerlink" title="Example Package"></a>Example Package</h3><p>Protocol: Modbus TCP<br>讀取 Device ID 1 設備上於 40001 ~ 40002 位置的值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+---------------------------------------------------------------------------+</span><br><span class="line">|  Modbus Application Protocol (MBAP) Header   | Modbus PDU                 |</span><br><span class="line">+----------------------------------------------+----------------------------+</span><br><span class="line">| Transaction ID | Protocol | Length  | UnitID | FC | DataAddress | Number  |</span><br><span class="line">+---------------------------------------------------------------------------+</span><br><span class="line">|  00  |   01   | 00 |  00  | 00 | 06 |   01   | 03 |  00  |  00  | 00 | 02 |</span><br><span class="line">+---------------------------------------------------------------------------+</span><br></pre></td></tr></table></figure>
 
-    </header>
+<h2 id="資料儲存區"><a href="#資料儲存區" class="headerlink" title="資料儲存區"></a>資料儲存區</h2><h3 id="資料組架構"><a href="#資料組架構" class="headerlink" title="資料組架構"></a>資料組架構</h3><p>我們已經知道 ADU 的範例長得如何，這次我們可以透過圖表來了解 Modbus 資料儲存區的種類。<br>名稱也可能會基於產業或應用而有所不同，資料組間定義了資料內容以及存取權限。</p>
+<table>
+<thead>
+<tr>
+<th>記憶體區塊</th>
+<th>資料類型</th>
+<th>主機裝置存取</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Coil Status</td>
+<td>Boolean</td>
+<td>讀/寫</td>
+</tr>
+<tr>
+<td>Discrete Inputs</td>
+<td>Boolean</td>
+<td>讀</td>
+</tr>
+<tr>
+<td>Input Register</td>
+<td>unsigned char</td>
+<td>讀</td>
+</tr>
+<tr>
+<td>Holding Register</td>
+<td>unsigned char</td>
+<td>讀/寫</td>
+</tr>
+</tbody></table>
+<h3 id="資料對應表"><a href="#資料對應表" class="headerlink" title="資料對應表"></a>資料對應表</h3><p>PLC 資料於記憶體對應的 Modbus 位址</p>
+<ol>
+<li>Coils Status (0:1~65535)<br>以 00001 表示，儲存邏輯數據，可寫入，用於控制。</li>
+<li>Discrete Inputs (1:1~65535)<br>以 10001 表示，儲存邏輯數據，只可讀。</li>
+<li>Input Register (3:1<del>65535)<br>以 30001 表示，儲存數值數據 (0</del>65536; 2 Bytes)，只可讀。</li>
+<li>Holding Register (4:1<del>65535)<br>以 40001 表示，儲存數值數據 (0</del>65536; 2 Bytes)，通常可寫，用於控制。</li>
+</ol>
+<h3 id="Modbus-資料位址設定範圍"><a href="#Modbus-資料位址設定範圍" class="headerlink" title="Modbus 資料位址設定範圍"></a>Modbus 資料位址設定範圍</h3><p>編號機制，於資料位址加上 prefix。</p>
+<p>Example:</p>
+<ul>
+<li>保存暫存器 14, 以 4,014 或 40,014 或 400,014 表示。</li>
+<li>常見範圍: 4001 ~ 4999, 40001 ~ 49999</li>
+</ul>
+<h3 id="Modbus-資料位址起始值"><a href="#Modbus-資料位址起始值" class="headerlink" title="Modbus 資料位址起始值"></a>Modbus 資料位址起始值</h3><p>根據實作方式所選擇的索引方式，會有不同記憶體地址。</p>
+<p>| 地址 | 暫存器編碼 | 編號(索引 1) | 編號(索引 0) |<br>| 0    | 1          | 400001       | 4000000      |<br>| 1    | 2          | 400002       | 4000001      |<br>| 2    | 3          | 400003       | 4000002      |</p>
+<h1 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h1><p>瞭解 Modbus 的資料儲存區操作，對於避免資料存取出錯或是最佳化存取效率都會有所幫助。此外，對於在網路環境中使用 Modbus 的工程師而言，了解 ADU 的結構以及其與 PDU 的關聯也極為重要，能有效地提升資料傳輸的安全性與效率，對於資訊安全研究者是截然不可或缺的一部分。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zonetwelve.io/2023/08/15/Modbus-Security-pt-2/" data-id="cllcd0grw0004ah5g841r8h02" data-title="Modbus Security pt.2" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Infrastructure/" rel="tag">Infrastructure</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Modbus/" rel="tag">Modbus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Security/" rel="tag">Security</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/08/14/%E8%A7%80%E5%BE%8C%E6%84%9F-%E4%B8%80%E4%BA%BA%E8%A8%AD%E8%A8%88%E5%B8%AB%E7%9A%84%E6%B1%82%E7%94%9F%E6%8C%87%E5%8D%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">觀後感：一位獨立設計師的生存手冊</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>
