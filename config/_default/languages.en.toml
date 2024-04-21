@@ -1,0 +1,20 @@
+languageCode = "en"
+languageName = "English"
+weight = 1
+title = "Zone Twelve"
+
+[params]
+displayName = "EN"
+isoCode = "en"
+rtl = false
+dateFormat = "2 January 2006"
+logo = "ZoneTwelveAvatar.png"
+secondaryLogo = "ZoneTwelveAvatar.png"
+description = "ZoneTwelve's Tech Blog: Your hub for tech insights, tutorials, and discussions."
+
+[author]
+name = "ZoneTwelve"
+image = "ZoneTwelveAvatar.png"
+headline = "Tech Blog: Where Innovation Meets Inspiration"
+bio = "Build and Growth"
+links = []

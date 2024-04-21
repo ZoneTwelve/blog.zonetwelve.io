@@ -1,0 +1,31 @@
+[[main]]
+none = "none"
+
+[[main]]
+name = "Article"
+pre = "blogger"
+pageRef = "article"
+identifier = "2yn4Vtx70G"
+weight = 9999
+
+[[main]]
+name = "Resources"
+pre = "codepen"
+pageRef = "Resources"
+identifier = "yGoiy3yeje"
+weight = 9999
+
+[[footer]]
+none = "none"
+
+[[footer]]
+name = "Conf"
+pageRef = "conference"
+identifier = "rktjeq9POl"
+weight = 9999
+
+[[footer]]
+name = "Partner"
+pageRef = "Partners"
+identifier = "Od0Jm5Y9fv"
+weight = 9999
