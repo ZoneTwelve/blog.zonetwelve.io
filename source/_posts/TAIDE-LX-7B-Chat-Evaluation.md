@@ -3,6 +3,8 @@ title: TAIDE-LX-7B-Chat-Evaluation
 date: 2024-04-17 20:16:07
 tags:
 ---
+Evaluate with TCEval_v2
+<!-- more -->
 
 | name                                                                          |   acc |   acc_err |   exact_match,get-answer |   exact_match_stderr |   exact_match |   exact_match_stderr |
 |:------------------------------------------------------------------------------|-----------:|------------------:|-------------------------:|--------------------------------:|-------------------:|--------------------------:|
