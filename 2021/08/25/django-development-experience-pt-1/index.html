@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Django 開發記 Pt.1 | ZoneTwelve Dev</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Intro這兩天我東看看西看看接著就被問到一個問題，你會寫 Django 嗎？這麼突如其來的發問，我只能說我沒有寫 Python 的習慣，但是我也好奇了難道 Django 有那麼難寫嗎？需要到跑來問我？我就直接下手來開寫一個 Django based Web Application，殊不知這個旅途非常痛苦而且不是一般的痛苦，是非常痛苦，顯然我太菜了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django 開發記 Pt.1">
+<meta property="og:url" content="https://zonetwelve.io/2021/08/25/django-development-experience-pt-1/index.html">
+<meta property="og:site_name" content="ZoneTwelve Dev">
+<meta property="og:description" content="Intro這兩天我東看看西看看接著就被問到一個問題，你會寫 Django 嗎？這麼突如其來的發問，我只能說我沒有寫 Python 的習慣，但是我也好奇了難道 Django 有那麼難寫嗎？需要到跑來問我？我就直接下手來開寫一個 Django based Web Application，殊不知這個旅途非常痛苦而且不是一般的痛苦，是非常痛苦，顯然我太菜了。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://zonetwelve.io/2021/08/25/django-development-experience-pt-1/MVC-structure.png">
+<meta property="og:image" content="https://zonetwelve.io/2021/08/25/django-development-experience-pt-1/MTV-structure.png">
+<meta property="article:published_time" content="2021-08-24T16:49:45.000Z">
+<meta property="article:modified_time" content="2025-08-09T01:39:54.682Z">
+<meta property="article:author" content="ZoneTwelve">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Django">
+<meta property="article:tag" content="MTV">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zonetwelve.io/2021/08/25/django-development-experience-pt-1/MVC-structure.png">
+  
+    <link rel="alternate" href="/atom.xml" title="ZoneTwelve Dev" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ZoneTwelve Dev</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://zonetwelve.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-django-development-experience-pt-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/08/25/django-development-experience-pt-1/" class="article-date">
+  <time class="dt-published" datetime="2021-08-24T16:49:45.000Z" itemprop="datePublished">2021-08-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Django 開發記 Pt.1
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><p>這兩天我東看看西看看接著就被問到一個問題，你會寫 Django 嗎？<br>這麼突如其來的發問，我只能說我沒有寫 Python 的習慣，但是我也好奇了難道 Django 有那麼難寫嗎？需要到跑來問我？<br>我就直接下手來開寫一個 Django based Web Application，殊不知這個旅途非常痛苦<br>而且不是一般的痛苦，是非常痛苦，顯然我太菜了。</p>
+<span id="more"></span>
+
+<h1 id="Django"><a href="#Django" class="headerlink" title="Django"></a>Django</h1><p>講到 Django 就是一個 Python 後端的開發框架，他採用了<code>類 MVC</code> 架構的模式進行開發，這個就叫做 <code>MTV</code>，u接著我會稍稍提到 MTV 架構究竟是什麼樣的概念。<br><small style="color:red;">注意：這邊都是採用 django-admin 生成的後端模板進行展示與說明</small></p>
+<h2 id="MVC-架構"><a href="#MVC-架構" class="headerlink" title="MVC 架構"></a>MVC 架構</h2><p>簡單介紹 MVC 架構，主要 handle 請求的 Controller、提供使用者操作的圖形界面 View 以及 提供解決辦法的模型 Model，這三個部份簡單的構成了乾淨、穩定的執行環境，但多少也會存在一些缺陷，稍後會提到。</p>
+<ul>
+<li>使用者透過 View 取得控制界面<ul>
+<li>User → Controller → View (使用者透過 Controller 取得相對的 View)</li>
+<li>　　 ← Controller ← View ← User (使用者透過 View 請求計算的內容)</li>
+<li>Contoller → Model (取得計算資訊)</li>
+<li>　　　　　← Model (回傳計算結果)</li>
+</ul>
+</li>
+</ul>
+<p><img src="MVC-structure.png" alt="MVC structure"><br>大致上是這樣，至於在 Node.js Express 又是如何的呢？</p>
+<h3 id="Node-js-express"><a href="#Node-js-express" class="headerlink" title="Node.js express"></a>Node.js express</h3><p><code>bin/www</code> 是整個伺服器的核心，用於 handle 我們的 <code>http(s) server</code><br><code>app.js</code> 其實就是 <code>Controller</code>，專門分配資源到其他的路徑( <code>Path</code> )<br><code>routes/*.js</code> 也是 <code>Contoller</code> 的一部分，但是這部份就是開始銜接 <code>Model</code> 的部份<br><code>view/*.ejs</code> 這邊採用 ejs 作為 <code>View</code> 的 <code>template</code>，最終結果會透過 <code>ejs</code> 渲染給使用者。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">MVC/</span><br><span class="line">├── app.js</span><br><span class="line">├── bin</span><br><span class="line">│   └── www</span><br><span class="line">├── package.json</span><br><span class="line">├── public</span><br><span class="line">│   ├── images</span><br><span class="line">│   ├── javascripts</span><br><span class="line">│   └── stylesheets</span><br><span class="line">│       └── style.css</span><br><span class="line">├── routes</span><br><span class="line">│   ├── index.js</span><br><span class="line">│   └── users.js</span><br><span class="line">└── views</span><br><span class="line">    ├── error.ejs</span><br><span class="line">    └── index.ejs</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="MTV-架構"><a href="#MTV-架構" class="headerlink" title="MTV 架構"></a>MTV 架構</h2><p>MTV 架構最有趣的地方是他跟 MVC 很像，但是在 View 的部份被區分成 Template 以及 View 兩個部份，這兩部份最大的差異就是一個是專門處理使用者該看到什麼資料的 View (牽涉到 <code>urls.py</code>、<code>service/</code>、<code>MTV</code><sub>備 pd1</sub>)，另一個則是專門渲染資料的 Template。沒聽懂嗎？沒關係，下面這張圖大概就是這麼運行的<br><small>備pd1: urls.py、service/、MTV/ 分別是在 Django 的實際範本（下面會提到）</small></p>
+<ul>
+<li>Contoller (Django) handle 所有東西的架構</li>
+<li>Model 提供一些演算法/功能</li>
+<li>Template 使用者界面的模板</li>
+<li>View 處理使用者請求的架構</li>
+</ul>
+<p><img src="MTV-structure.png" alt="MTV structure"></p>
+<h3 id="Python-Django"><a href="#Python-Django" class="headerlink" title="Python Django"></a>Python Django</h3><p>在 django 中資料結構又是如何呢？<sub>pd1</sub></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">MTV/</span><br><span class="line">├── manage.py</span><br><span class="line">├── MTV (View 專門 handle `root /` 的事件)</span><br><span class="line">│   ├── asgi.py</span><br><span class="line">│   ├── __init__.py</span><br><span class="line">│   ├── settings.py</span><br><span class="line">│   ├── urls.py</span><br><span class="line">│   └── wsgi.py</span><br><span class="line">└── service</span><br><span class="line">    ├── admin.py</span><br><span class="line">    ├── apps.py</span><br><span class="line">    ├── __init__.py</span><br><span class="line">    ├── migrations</span><br><span class="line">    │   └── __init__.py</span><br><span class="line">    ├── models.py</span><br><span class="line">    ├── tests.py</span><br><span class="line">    ├── urls.py</span><br><span class="line">    └── views.py</span><br></pre></td></tr></table></figure>
+
+<p>這裡的 Contoller 就不必多說了，主要討論 Model、Template 以及 View</p>
+<p><code>MTV/</code>、<code>service/</code> 這兩個資料夾都包含 model、template、view</p>
+<ul>
+<li>models.py - Model，就是 model</li>
+<li>views.py - template (包含 TEMPLATE 的 UI) <small>本範例不包含 template 資料夾</small></li>
+<li>urls.py - View 導向使用看到的內容</li>
+</ul>
+<p>這大概是整個 Django 的架構，之後會接著介紹 django-admin 以及 django 如何開發。<br>就等我寫完再說 ouo.</p>
+<h1 style="color:pink;">若有任何錯誤，歡迎糾正，非專業廢柴的筆記</h1>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zonetwelve.io/2021/08/25/django-development-experience-pt-1/" data-id="cme3ld18k0008m0itaa3h6l1m" data-title="Django 開發記 Pt.1" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MTV/" rel="tag">MTV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/11/14/keychron-on-linux/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          Keychron 在 Linux 的 Function key (F鍵) 無法使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/08/21/basic-nginx-reverse-proxy/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">basic Nginx Reverse Proxy</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AFFiNE/" rel="tag">AFFiNE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI-%E5%A4%A7%E5%9E%8B%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8B-Anything-LLM-LM-Studio-RAG/" rel="tag">AI, 大型語言模型, Anything LLM, LM Studio, RAG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Analysis/" rel="tag">Analysis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arduino/" rel="tag">Arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Audio/" rel="tag">Audio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cloud/" rel="tag">Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/" rel="tag">Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Function-key/" rel="tag">Function key</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Home-Lab/" rel="tag">Home Lab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Infrastructure/" rel="tag">Infrastructure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IoT/" rel="tag">IoT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keychron/" rel="tag">Keychron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MTV/" rel="tag">MTV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/" rel="tag">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MacOS-13-Ventura/" rel="tag">MacOS 13 Ventura</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Management/" rel="tag">Management</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Modbus/" rel="tag">Modbus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/" rel="tag">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OBS/" rel="tag">OBS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-Source/" rel="tag">Open Source</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programmer/" rel="tag">Programmer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proxmox/" rel="tag">Proxmox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Security/" rel="tag">Security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Server/" rel="tag">Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Share/" rel="tag">Share</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Static-IP/" rel="tag">Static IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Story/" rel="tag">Story</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TAIDE/" rel="tag">TAIDE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Teams/" rel="tag">Teams</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VM/" rel="tag">VM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fix/" rel="tag">fix</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/my-first-smart-lamp/" rel="tag">my-first-smart-lamp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/port-forwarding/" rel="tag">port forwarding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reverse-proxy/" rel="tag">reverse proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7/" rel="tag">人工智慧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%B5%E5%AE%A2/" rel="tag">創客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87/" rel="tag">工作效率提升</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/" rel="tag">機器學習</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AFFiNE/" style="font-size: 10px;">AFFiNE</a> <a href="/tags/AI-%E5%A4%A7%E5%9E%8B%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8B-Anything-LLM-LM-Studio-RAG/" style="font-size: 10px;">AI, 大型語言模型, Anything LLM, LM Studio, RAG</a> <a href="/tags/Analysis/" style="font-size: 10px;">Analysis</a> <a href="/tags/Arduino/" style="font-size: 10px;">Arduino</a> <a href="/tags/Audio/" style="font-size: 10px;">Audio</a> <a href="/tags/Cloud/" style="font-size: 10px;">Cloud</a> <a href="/tags/Design/" style="font-size: 10px;">Design</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Function-key/" style="font-size: 10px;">Function key</a> <a href="/tags/Home-Lab/" style="font-size: 10px;">Home Lab</a> <a href="/tags/Infrastructure/" style="font-size: 20px;">Infrastructure</a> <a href="/tags/IoT/" style="font-size: 20px;">IoT</a> <a href="/tags/Keychron/" style="font-size: 10px;">Keychron</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MTV/" style="font-size: 10px;">MTV</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/MacOS-13-Ventura/" style="font-size: 10px;">MacOS 13 Ventura</a> <a href="/tags/Management/" style="font-size: 10px;">Management</a> <a href="/tags/Modbus/" style="font-size: 20px;">Modbus</a> <a href="/tags/Network/" style="font-size: 10px;">Network</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/OBS/" style="font-size: 10px;">OBS</a> <a href="/tags/Open-Source/" style="font-size: 10px;">Open Source</a> <a href="/tags/Programmer/" style="font-size: 10px;">Programmer</a> <a href="/tags/Proxmox/" style="font-size: 10px;">Proxmox</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Security/" style="font-size: 20px;">Security</a> <a href="/tags/Server/" style="font-size: 10px;">Server</a> <a href="/tags/Share/" style="font-size: 10px;">Share</a> <a href="/tags/Static-IP/" style="font-size: 10px;">Static IP</a> <a href="/tags/Story/" style="font-size: 10px;">Story</a> <a href="/tags/TAIDE/" style="font-size: 10px;">TAIDE</a> <a href="/tags/Teams/" style="font-size: 10px;">Teams</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VM/" style="font-size: 10px;">VM</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/fix/" style="font-size: 10px;">fix</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/my-first-smart-lamp/" style="font-size: 20px;">my-first-smart-lamp</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/port-forwarding/" style="font-size: 10px;">port forwarding</a> <a href="/tags/reverse-proxy/" style="font-size: 10px;">reverse proxy</a> <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7/" style="font-size: 10px;">人工智慧</a> <a href="/tags/%E5%89%B5%E5%AE%A2/" style="font-size: 20px;">創客</a> <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87/" style="font-size: 10px;">工作效率提升</a> <a href="/tags/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/" style="font-size: 10px;">機器學習</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">八月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/08/09/fix-iterm2-inactive-pane-gray-overlay-macos/">Fixing iTerm2 Gray Overlay on Inactive Panes in macOS（解決 macOS iTerm2 非活動視窗灰色蒙層問題）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/04/24/using-taide-with-rag-md/">(下) 擁有超能力？！大型語言模型輔助學習，從無到有學會使用 RAG (Part 2. Anything LLM 基礎)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/04/23/using-taide-easily/">(上) AI 焦慮？怕被 AI 淘汰？手把手教你在筆電上使用 TAIDE！(Part 1. LM-Studio)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/04/17/TAIDE-LX-7B-Chat-Evaluation/">TAIDE-LX-7B-Chat-Evaluation</a>
+          </li>
+        
+          <li>
+            <a href="/2024/04/14/minecraft-forge-server-setup-guide/">Minecraft 伺服器架設指南 (Moded Forge Server / Forge 模組伺服器)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 ZoneTwelve<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
