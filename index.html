@@ -95,106 +95,11 @@
       
         <p>The Dr. Chi start with the histroy of Sequence to sequence model. He have mention the early researchers used RNNs. But what does that mean? It means information is passed step by step, with each step depending on the previous one.</p>
 <p>But then came the <strong>Transformer model</strong> <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03762">Vaswani et al., 2017</a>. Instead of relying on recursive steps, Transformers carry information forward using <strong>matrix multiplications</strong>. That changes the computation from <em>linear time</em> to <em>quadratic time (O(n²))</em>. heavier, yes, but much better suited for GPUs.</p>
-<p>And GPUs are incredibly efficient at matrix multiplications. That’s why they became so critical to the deep learning revolution. This shift connected decades of neural network research to the breakthroughs of the last ten years.</p>
-<hr>
-<p>Dr. Chi also raises the question: So, what machines are really good at matrix multiplications?</p>
-<p>The answer is <strong>Graphics accelerators.</strong> That’s why GPUs were so important.</p>
-<hr>
-<p>Back in <strong>2015</strong>, we learned that deep neural networks could:</p>
-<ul>
-<li>Take an image and output a description shows “It’s a lion.”</li>
-<li>Take audio and recognize speech.</li>
-</ul>
-<p>Think about this: In 2010, if you told your phone, “Call my mom,” you’d be lucky if it didn’t call your ex-girlfriend Mona. The error rates were around <strong>25%</strong> (That’s one in four words wrong).</p>
-<p>Nowadays, systems like <strong>Google Gemini</strong> can handle speech in a noisy bar and still get it right. That level of robustness was unimaginable 10–15 years ago.</p>
-<hr>
-<p>In <strong>2015</strong>, we also saw breakthroughs in:</p>
-<ul>
-<li><strong>Machine Translation</strong> (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1409.3215">Sutskever et al., 2014</a>)</li>
-<li><strong>Image Captioning</strong> (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1411.4555">Vinyals et al., 2015</a>)</li>
-</ul>
-<p>For example, a system could look at pixels and say:</p>
-<blockquote>
-<p>“A blue and yellow train is traveling down the track.”</p>
-</blockquote>
-<p>This was revolutionary and personally meaningful for me since English is my second language. Neural networks could finally handle the complexity of language.</p>
-<p>Because of the nature of language, just as we say “red, green, blue” or “cyan, magenta, yellow, Key Plate,” language often determines the order in which we express things, so a model might naturally say “blue” before “yellow.” Doesn’t that sound amazing? the language model learned this pattern without any additional training, capturing the natural rhythm and vibe of language.</p>
-<p>At the time, though, very few people knew. The entire machine learning community was maybe 30,000 people. Only a few thousand were aware of these results. If you were one of them — as I was — you could see what was coming. Imagine investing in Nvidia then. From 2015 to now, its stock has grown over <strong>400x</strong>.</p>
-<p>The lesson: when you see research that can change history, invest in it! With your time, your money, and your career.</p>
-<hr>
-<h2 id="Generative-AI-and-Sequential-Transduction"><a href="#Generative-AI-and-Sequential-Transduction" class="headerlink" title="Generative AI and Sequential Transduction"></a>Generative AI and Sequential Transduction</h2><p>The press calls it <strong>Generative AI</strong>, but very few understand why. The reason is <strong>sequential transduction</strong>. The autoregressive models generate outputs one token at a time, predicting each based on the previous.</p>
-<p>And here’s a fun fact: a <strong>microphone</strong> and a <strong>speaker</strong> have the same construction. A membrane backed by a magnet. One can transmit, the other receive. Similarly, the same neural architecture can be used for many tasks: translation, summarization, question answering, include chatting.</p>
-<p>That’s why a single <strong>Transformer model</strong> can handle all of these.</p>
-<hr>
-<h2 id="Early-Chatbots"><a href="#Early-Chatbots" class="headerlink" title="Early Chatbots"></a>Early Chatbots</h2><p>In December 2014, a little-known paper introduced the idea of a <strong>neural conversational model</strong> (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1506.05869">Vinyals &amp; Le, 2015</a>). If you had read it, you’d know that chatbots like ChatGPT weren’t a sudden revolution. Because the idea was there years earlier.</p>
-<p>By 2020–2022, Google’s <strong>LaMDA project</strong> was already building these systems. Thousands of Googlers were using them internally. We warned leadership:</p>
-<blockquote>
-<p>“This model can translate, summarize, answer questions, and chat — all in one system. This is a paradigm shift.”</p>
-</blockquote>
-<p>But the company waited. Then in late 2022, ChatGPT was released, and suddenly the world woke up.</p>
-<hr>
-<h2 id="Convergence-vs-Divide-and-Conquer"><a href="#Convergence-vs-Divide-and-Conquer" class="headerlink" title="Convergence vs. Divide-and-Conquer"></a>Convergence vs. Divide-and-Conquer</h2><p>Traditionally, computer science followed a <strong>divide-and-conquer</strong> approach. For example:</p>
-<ul>
-<li>Want to summarize a Ukrainian text in Japanese? Build one system for translation, another for summarization, then combine them.</li>
-</ul>
-<p>That era is ending. With large models, you can do <strong>both at once</strong>. One call, one model. This is <strong>convergence</strong>, and it fundamentally changes how we build systems.</p>
-<p>At Google and elsewhere, this shift is painful — entire organizations are restructuring. But it’s real. This is the <strong>true paradigm shift.</strong></p>
-<hr>
-<h2 id="Chain-of-Thought"><a href="#Chain-of-Thought" class="headerlink" title="Chain of Thought"></a>Chain of Thought</h2><p>Another big idea: <strong>Chain of Thought reasoning</strong> (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2201.11903">Wei et al., 2022</a>).</p>
-<p>In classic machine learning, you learn input -&gt; output. But humans don’t just give answers and we explain steps.</p>
-<p>Example:</p>
-<ul>
-<li>Roger has 5 tennis balls. He buys 2 cans, each with 3 balls.</li>
-<li><strong>Reasoning:</strong> 2 cans × 3 = 6. 5 + 6 = 11.</li>
-<li><strong>Answer:</strong> 11.</li>
-</ul>
-<p>When we train models with such explanations, they learn to generalize better. This mirrors how humans learn, and it’s crucial for building <strong>reasoning machines.</strong></p>
-<p>Building a reasoning machine might seem difficult, but we can guide it by providing an example. This also points to the key for the next stage of the AI era.</p>
-<p>Language models are good at recognizing patterns and repeating them. We can leverage this strength to let the model improve continuously through self-involvement.</p>
-<p>This is what I believe Dr. Chi was trying to point out.</p>
-<hr>
-<h2 id="Demo-Predicting-the-Next-Word"><a href="#Demo-Predicting-the-Next-Word" class="headerlink" title="Demo: Predicting the Next Word"></a>Demo: Predicting the Next Word</h2><p>Let me show you something fun.</p>
-<p>When I say:</p>
-<blockquote>
-<p>“When I am explain…”</p>
-</blockquote>
-<p>You’re already predicting the next word in your head. Maybe “speaking” or “saying.”</p>
-<p>And when I actually say “say,” you’re not surprised. Why? Because your brain just did a <strong>softmax prediction</strong>. Exactly like a language model.</p>
-<p>That’s <strong>next-token prediction.</strong> It’s the foundation of intelligence. But it’s not enough. For true reasoning, we need schemas, planning, and Chain-of-thought. That’s the next step toward AGI.</p>
-<hr>
-<h2 id="The-Future"><a href="#The-Future" class="headerlink" title="The Future"></a>The Future</h2><p>What’s next?</p>
-<ul>
-<li><strong>Multi-step reasoning</strong></li>
-<li><strong>Multimodal input/output</strong> (text, images, speech, diagrams)</li>
-<li><strong>Memory &amp; personalization</strong></li>
-<li><strong>Synthetic data generation</strong></li>
-<li><strong>Preference alignment</strong></li>
-</ul>
-<p>We’re already building agents that can:</p>
-<ul>
-<li>Read a bike manual and find the right screw</li>
-<li>Search YouTube for repair videos</li>
-<li>Call a shop to check stock</li>
-<li>Help a student with chemistry problems</li>
-</ul>
-<p>This goes far beyond ranking, which still underpins much of the $500B internet economy. We’re entering a new world, powered by reasoning machines.</p>
-<hr>
-<h2 id="Closing-Thoughts"><a href="#Closing-Thoughts" class="headerlink" title="Closing Thoughts"></a>Closing Thoughts</h2><p>We’ve moved from <strong>RNNs -&gt; Transformers -&gt; Generative AI with reasoning.</strong><br>This is not hype. It’s a true paradigm shift.</p>
-<p>The lesson?</p>
-<ul>
-<li>Recognize transformative research.</li>
-<li>Invest in it — with your career, your energy, and your money.</li>
-<li>Because this is how we invent the future.</li>
-</ul>
-<hr>
-<h2 id="Key-References"><a href="#Key-References" class="headerlink" title="Key References"></a>Key References</h2><ol>
-<li>Vaswani et al. (2017). <em>Attention is All You Need</em> – <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03762">Paper</a></li>
-<li>Sutskever et al. (2014). <em>Sequence to Sequence Learning with Neural Networks</em> – <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1409.3215">Paper</a></li>
-<li>Vinyals et al. (2015). <em>Show and Tell: Image Captioning</em> – <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1411.4555">Paper</a></li>
-<li>Vinyals &amp; Le (2015). <em>A Neural Conversational Model</em> – <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1506.05869">Paper</a></li>
-<li>Wei et al. (2022). <em>Chain-of-Thought Prompting Elicits Reasoning in LLMs</em> – <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2201.11903">Paper</a></li>
-</ol>
-
+        
+          <p class="article-more-link">
+            <a href="/2025/09/15/Ed-H-Chi-The-Future-of-Personalized-Universal-Assistant/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
