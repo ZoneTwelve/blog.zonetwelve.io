@@ -13,6 +13,8 @@ The Dr. Chi start with the histroy of Sequence to sequence model. He have mentio
 
 But then came the **Transformer model** [Vaswani et al., 2017](https://arxiv.org/abs/1706.03762). Instead of relying on recursive steps, Transformers carry information forward using **matrix multiplications**. That changes the computation from *linear time* to *quadratic time (O(n²))*. heavier, yes, but much better suited for GPUs.
 
+<!-- more -->
+
 And GPUs are incredibly efficient at matrix multiplications. That’s why they became so critical to the deep learning revolution. This shift connected decades of neural network research to the breakthroughs of the last ten years.
 
 ---
