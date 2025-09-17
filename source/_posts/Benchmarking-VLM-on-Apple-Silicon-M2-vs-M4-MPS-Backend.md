@@ -20,6 +20,8 @@ Ever wondered how fast cutting-edge vision-language models can run on Apple Sili
 
 It also benchmarks **runtime performance** of these tasks to compare different Apple Silicon chips (M2 vs M4) using the **Metal Performance Shaders (MPS)** backend.
 
+<!-- more -->
+
 ```python
 import time
 from transformers import AutoModelForCausalLM
