@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>聲音的魔法師！任何人都能用的 AI 語音複製工具 (Part 1. VoxCPM 介紹與實戰) | ZoneTwelve Dev</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前言你是否曾經想為你的影片或專案配音，卻發現市面上的 TTS (文字轉語音) 工具要嘛聲音生硬得像機器人，要嘛就是要價不菲？想找專業配音員，預算又是一大考驗。這些煩惱，可能即將成為過去式。 今天，我們要來介紹一個強大的開源 AI 語音模型：VoxCPM。它就像一個聲音的魔法師，不僅能生成極富感情的語音，甚至還能複製幾乎任何人的聲音！最棒的是，它是開源的，代表著我們每個人都能親手體驗這個黑科技。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="聲音的魔法師！任何人都能用的 AI 語音複製工具 (Part 1. VoxCPM 介紹與實戰)">
+<meta property="og:url" content="https://zonetwelve.io/2025/09/18/VoxCPM-A-New-Era-in-Speech-Generation/index.html">
+<meta property="og:site_name" content="ZoneTwelve Dev">
+<meta property="og:description" content="前言你是否曾經想為你的影片或專案配音，卻發現市面上的 TTS (文字轉語音) 工具要嘛聲音生硬得像機器人，要嘛就是要價不菲？想找專業配音員，預算又是一大考驗。這些煩惱，可能即將成為過去式。 今天，我們要來介紹一個強大的開源 AI 語音模型：VoxCPM。它就像一個聲音的魔法師，不僅能生成極富感情的語音，甚至還能複製幾乎任何人的聲音！最棒的是，它是開源的，代表著我們每個人都能親手體驗這個黑科技。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://zonetwelve.io/2025/09/18/VoxCPM-A-New-Era-in-Speech-Generation/voxcpm.png">
+<meta property="article:published_time" content="2025-09-18T14:53:55.000Z">
+<meta property="article:modified_time" content="2025-09-18T15:04:08.126Z">
+<meta property="article:author" content="ZoneTwelve">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="VoiceCloning">
+<meta property="article:tag" content="VoxCPM">
+<meta property="article:tag" content="TechRevolution">
+<meta property="article:tag" content="FutureIsNow">
+<meta property="article:tag" content="ContentCreator">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zonetwelve.io/2025/09/18/VoxCPM-A-New-Era-in-Speech-Generation/voxcpm.png">
+  
+    <link rel="alternate" href="/atom.xml" title="ZoneTwelve Dev" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">ZoneTwelve Dev</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://zonetwelve.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-VoxCPM-A-New-Era-in-Speech-Generation" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/09/18/VoxCPM-A-New-Era-in-Speech-Generation/" class="article-date">
+  <time class="dt-published" datetime="2025-09-18T14:53:55.000Z" itemprop="datePublished">2025-09-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      聲音的魔法師！任何人都能用的 AI 語音複製工具 (Part 1. VoxCPM 介紹與實戰)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>你是否曾經想為你的影片或專案配音，卻發現市面上的 TTS (文字轉語音) 工具要嘛聲音生硬得像機器人，要嘛就是要價不菲？想找專業配音員，預算又是一大考驗。這些煩惱，可能即將成為過去式。</p>
+<p>今天，我們要來介紹一個強大的開源 AI 語音模型：<strong>VoxCPM</strong>。它就像一個聲音的魔法師，不僅能生成極富感情的語音，甚至還能複製幾乎任何人的聲音！最棒的是，它是開源的，代表著我們每個人都能親手體驗這個黑科技。</p>
+<p><img src="/2025/09/18/VoxCPM-A-New-Era-in-Speech-Generation/voxcpm.png" alt="VoxCPM 展示網站，往下看如何使用"></p>
+<span id="more"></span>
+
+<h4 id="相關工具介紹"><a href="#相關工具介紹" class="headerlink" title="相關工具介紹"></a>相關工具介紹</h4><p>在開始之前，讓我們先了解一下會用到的主角：</p>
+<ul>
+<li><strong>VoxCPM</strong>: 一個開源、大型的語音生成基礎模型，能夠進行高品質的文字轉語音 (TTS) 和聲音複製 (Voice Cloning)。</li>
+<li><strong>Hugging Face Space</strong>: 一個讓開發者可以展示和分享 AI 模型 Demo 的平台。我們將透過這裡的 Demo 網站來快速體驗 VoxCPM 的威力，完全不需要在本機安裝任何東西。</li>
+<li><strong>GitHub</strong>: 如果你是進階玩家，想在自己的電腦上部署，可以在這裡找到 VoxCPM 的完整原始碼和指南。</li>
+</ul>
+<h4 id="VoxCPM-核心功能"><a href="#VoxCPM-核心功能" class="headerlink" title="VoxCPM 核心功能"></a>VoxCPM 核心功能</h4><p>VoxCPM 之所以強大，主要歸功於以下幾個核心功能：</p>
+<ul>
+<li><strong>高品質的語音生成</strong>: 它生成的人聲非常自然，能夠表達豐富的情感，告別過去 TTS 的機器感。</li>
+<li><strong>雙語支援</strong>: 模型完美支援<strong>中文</strong>與<strong>英文</strong>，對於需要製作跨語言內容的創作者來說是一大福音。</li>
+<li><strong>零樣本聲音複製 (Zero-Shot Voice Cloning)</strong>: 這是最神奇的部分！你只需要提供一小段目標聲音的音檔（甚至幾秒鐘就夠了），VoxCPM 就能模仿該聲音的音色、風格和情感來說出你指定的任何文字。</li>
+</ul>
+<h4 id="VoxCPM-操作指南-Hugging-Face-Demo"><a href="#VoxCPM-操作指南-Hugging-Face-Demo" class="headerlink" title="VoxCPM 操作指南 (Hugging Face Demo)"></a>VoxCPM 操作指南 (Hugging Face Demo)</h4><p>對於初學者來說，最簡單的體驗方式就是使用官方在 Hugging Face 上提供的 Demo。</p>
+<h5 id="1-進入-Demo-頁面"><a href="#1-進入-Demo-頁面" class="headerlink" title="1. 進入 Demo 頁面"></a><strong>1. 進入 Demo 頁面</strong></h5><p>首先，打開 <a target="_blank" rel="noopener" href="https://huggingface.co/spaces/openbmb/VoxCPM-Demo">VoxCPM 的 Hugging Face Space</a> 頁面。你會看到如下的操作介面：</p>
+<p><code>[圖片：VoxCPM Hugging Face Demo 的整體介面截圖，標示出各個區塊]</code></p>
+<h5 id="2-上傳參考聲音-Prompt-Audio"><a href="#2-上傳參考聲音-Prompt-Audio" class="headerlink" title="2. 上傳參考聲音 (Prompt Audio)"></a><strong>2. 上傳參考聲音 (Prompt Audio)</strong></h5><p>在左手邊的 <code>Prompt Audio</code> 區塊，你可以上傳一段你想要複製的聲音。這段音檔不需要很長，3 到 10 秒就非常足夠了。</p>
+<p><code>[圖片說明：用紅色框線標示出上傳音檔的區塊]</code></p>
+<h5 id="3-輸入參考聲音的逐字稿-Prompt-Text"><a href="#3-輸入參考聲音的逐字稿-Prompt-Text" class="headerlink" title="3. 輸入參考聲音的逐字稿 (Prompt Text)"></a><strong>3. 輸入參考聲音的逐字稿 (Prompt Text)</strong></h5><p>這個步驟很重要！你必須在 <code>Prompt Text</code> 欄位中，一字不差地打出你剛剛上傳音檔裡的人說了些什麼。這是為了讓 AI 能準確地「校準」聲音和文字的對應關係。</p>
+<p><code>[圖片說明：用藍色框線標示出 Prompt Text 輸入框]</code></p>
+<h5 id="4-輸入你希望-AI-說出的新句子-Target-Text"><a href="#4-輸入你希望-AI-說出的新句子-Target-Text" class="headerlink" title="4. 輸入你希望 AI 說出的新句子 (Target Text)"></a><strong>4. 輸入你希望 AI 說出的新句子 (Target Text)</strong></h5><p>現在，在 <code>Target Text</code> 欄位中，輸入你希望 AI 用剛剛的聲音說出來的新內容。</p>
+<p><code>[圖片說明：用綠色框線標示出 Target Text 輸入框]</code></p>
+<h5 id="5-產生聲音！"><a href="#5-產生聲音！" class="headerlink" title="5. 產生聲音！"></a><strong>5. 產生聲音！</strong></h5><p>最後，按下 <code>Submit</code> 按鈕，稍等片刻，你就能在右側的 <code>Output Audio</code> 區塊聽到 AI 生成的結果了！是不是非常簡單？</p>
+<h4 id="RAG-實戰-Demo"><a href="#RAG-實戰-Demo" class="headerlink" title="RAG 實戰 Demo"></a>RAG 實戰 Demo</h4><p>接下來，我們實際測試看看它的效果！</p>
+<p>假設我們上傳了一段新聞主播的播報音檔，內容是「今天天氣晴朗，萬里無雲」。</p>
+<ol>
+<li> <strong>Prompt Audio</strong>: 上傳該段音檔。</li>
+<li> <strong>Prompt Text</strong>: 輸入「今天天氣晴朗，萬里無雲」。</li>
+<li> <strong>Target Text</strong>: 輸入「VoxCPM 是一個非常強大的開源語音模型」。</li>
+</ol>
+<p>按下 <code>Submit</code> 後，我們就能聽到 AI 模仿新聞主播的口吻和聲音，流暢地念出「VoxCPM 是一個非常強大的開源語音模型」。效果實在太驚人了！</p>
+<h4 id="它與其他模型的比較"><a href="#它與其他模型的比較" class="headerlink" title="它與其他模型的比較"></a>它與其他模型的比較</h4><ul>
+<li><strong>vs. ElevenLabs</strong>: ElevenLabs 是目前業界最頂尖的商業語音 AI，品質極高但需要付費。VoxCPM 作為一個開源模型，在品質上已經能與之較量，最大的優勢就是<strong>免費</strong>和<strong>高度客製化</strong>的潛力。</li>
+<li><strong>vs. VALL-E</strong>: 微軟的 VALL-E 同樣是個強大的聲音複製模型，但目前仍以學術研究為主，普通用戶很難接觸到。VoxCPM 則是完全開放給社群使用，讓 AI 民主化更進一步。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zonetwelve.io/2025/09/18/VoxCPM-A-New-Era-in-Speech-Generation/" data-id="cmfpjfu4k0000xgit80andmn9" data-title="聲音的魔法師！任何人都能用的 AI 語音複製工具 (Part 1. VoxCPM 介紹與實戰)" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ContentCreator/" rel="tag">ContentCreator</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FutureIsNow/" rel="tag">FutureIsNow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TechRevolution/" rel="tag">TechRevolution</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VoiceCloning/" rel="tag">VoiceCloning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VoxCPM/" rel="tag">VoxCPM</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2025/09/17/Benchmarking-VLM-on-Apple-Silicon-M2-vs-M4-MPS-Backend/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">🔥 M4 Crushes M2: Apple Silicon VLM Benchmark Shows Up to 5× Speed Boost!</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AFFiNE/" rel="tag">AFFiNE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI-%E5%A4%A7%E5%9E%8B%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8B-Anything-LLM-LM-Studio-RAG/" rel="tag">AI, 大型語言模型, Anything LLM, LM Studio, RAG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Analysis/" rel="tag">Analysis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple-Silicon/" rel="tag">Apple Silicon</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arduino/" rel="tag">Arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Audio/" rel="tag">Audio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Benchmark/" rel="tag">Benchmark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chain-of-Thought/" rel="tag">Chain of Thought</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cloud/" rel="tag">Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ContentCreator/" rel="tag">ContentCreator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/" rel="tag">Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Function-key/" rel="tag">Function key</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FutureIsNow/" rel="tag">FutureIsNow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Generative-AI/" rel="tag">Generative AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Home-Lab/" rel="tag">Home Lab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Infrastructure/" rel="tag">Infrastructure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IoT/" rel="tag">IoT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keychron/" rel="tag">Keychron</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Language-Models/" rel="tag">Language Models</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MPS/" rel="tag">MPS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MTV/" rel="tag">MTV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/" rel="tag">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MacOS-13-Ventura/" rel="tag">MacOS 13 Ventura</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Management/" rel="tag">Management</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Modbus/" rel="tag">Modbus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Multimodal-AI/" rel="tag">Multimodal AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/" rel="tag">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OBS/" rel="tag">OBS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-Source/" rel="tag">Open Source</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programmer/" rel="tag">Programmer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proxmox/" rel="tag">Proxmox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Security/" rel="tag">Security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Server/" rel="tag">Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Share/" rel="tag">Share</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Static-IP/" rel="tag">Static IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Story/" rel="tag">Story</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TAIDE/" rel="tag">TAIDE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Teams/" rel="tag">Teams</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TechRevolution/" rel="tag">TechRevolution</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Transformers/" rel="tag">Transformers</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VM/" rel="tag">VM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vision-Language-Models/" rel="tag">Vision Language Models</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VoiceCloning/" rel="tag">VoiceCloning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VoxCPM/" rel="tag">VoxCPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fix/" rel="tag">fix</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/my-first-smart-lamp/" rel="tag">my-first-smart-lamp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/port-forwarding/" rel="tag">port forwarding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reverse-proxy/" rel="tag">reverse proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7/" rel="tag">人工智慧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%B5%E5%AE%A2/" rel="tag">創客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87/" rel="tag">工作效率提升</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/" rel="tag">機器學習</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AFFiNE/" style="font-size: 10px;">AFFiNE</a> <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/AI-%E5%A4%A7%E5%9E%8B%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8B-Anything-LLM-LM-Studio-RAG/" style="font-size: 10px;">AI, 大型語言模型, Anything LLM, LM Studio, RAG</a> <a href="/tags/Analysis/" style="font-size: 10px;">Analysis</a> <a href="/tags/Apple-Silicon/" style="font-size: 10px;">Apple Silicon</a> <a href="/tags/Arduino/" style="font-size: 10px;">Arduino</a> <a href="/tags/Audio/" style="font-size: 10px;">Audio</a> <a href="/tags/Benchmark/" style="font-size: 10px;">Benchmark</a> <a href="/tags/Chain-of-Thought/" style="font-size: 10px;">Chain of Thought</a> <a href="/tags/Cloud/" style="font-size: 10px;">Cloud</a> <a href="/tags/ContentCreator/" style="font-size: 10px;">ContentCreator</a> <a href="/tags/Deep-Learning/" style="font-size: 10px;">Deep Learning</a> <a href="/tags/Design/" style="font-size: 10px;">Design</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Function-key/" style="font-size: 10px;">Function key</a> <a href="/tags/FutureIsNow/" style="font-size: 10px;">FutureIsNow</a> <a href="/tags/Generative-AI/" style="font-size: 10px;">Generative AI</a> <a href="/tags/Home-Lab/" style="font-size: 10px;">Home Lab</a> <a href="/tags/Infrastructure/" style="font-size: 20px;">Infrastructure</a> <a href="/tags/IoT/" style="font-size: 20px;">IoT</a> <a href="/tags/Keychron/" style="font-size: 10px;">Keychron</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/Language-Models/" style="font-size: 10px;">Language Models</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MPS/" style="font-size: 10px;">MPS</a> <a href="/tags/MTV/" style="font-size: 10px;">MTV</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/MacOS-13-Ventura/" style="font-size: 10px;">MacOS 13 Ventura</a> <a href="/tags/Management/" style="font-size: 10px;">Management</a> <a href="/tags/Modbus/" style="font-size: 20px;">Modbus</a> <a href="/tags/Multimodal-AI/" style="font-size: 10px;">Multimodal AI</a> <a href="/tags/Network/" style="font-size: 10px;">Network</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/OBS/" style="font-size: 10px;">OBS</a> <a href="/tags/Open-Source/" style="font-size: 10px;">Open Source</a> <a href="/tags/Programmer/" style="font-size: 10px;">Programmer</a> <a href="/tags/Proxmox/" style="font-size: 10px;">Proxmox</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Security/" style="font-size: 20px;">Security</a> <a href="/tags/Server/" style="font-size: 10px;">Server</a> <a href="/tags/Share/" style="font-size: 10px;">Share</a> <a href="/tags/Static-IP/" style="font-size: 10px;">Static IP</a> <a href="/tags/Story/" style="font-size: 10px;">Story</a> <a href="/tags/TAIDE/" style="font-size: 10px;">TAIDE</a> <a href="/tags/Teams/" style="font-size: 10px;">Teams</a> <a href="/tags/TechRevolution/" style="font-size: 10px;">TechRevolution</a> <a href="/tags/Transformers/" style="font-size: 10px;">Transformers</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VM/" style="font-size: 10px;">VM</a> <a href="/tags/Vision-Language-Models/" style="font-size: 10px;">Vision Language Models</a> <a href="/tags/VoiceCloning/" style="font-size: 10px;">VoiceCloning</a> <a href="/tags/VoxCPM/" style="font-size: 10px;">VoxCPM</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/fix/" style="font-size: 10px;">fix</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/my-first-smart-lamp/" style="font-size: 20px;">my-first-smart-lamp</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/port-forwarding/" style="font-size: 10px;">port forwarding</a> <a href="/tags/reverse-proxy/" style="font-size: 10px;">reverse proxy</a> <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7/" style="font-size: 10px;">人工智慧</a> <a href="/tags/%E5%89%B5%E5%AE%A2/" style="font-size: 20px;">創客</a> <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87/" style="font-size: 10px;">工作效率提升</a> <a href="/tags/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/" style="font-size: 10px;">機器學習</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/09/">九月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">八月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/09/18/VoxCPM-A-New-Era-in-Speech-Generation/">聲音的魔法師！任何人都能用的 AI 語音複製工具 (Part 1. VoxCPM 介紹與實戰)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/09/17/Benchmarking-VLM-on-Apple-Silicon-M2-vs-M4-MPS-Backend/">🔥 M4 Crushes M2: Apple Silicon VLM Benchmark Shows Up to 5× Speed Boost!</a>
+          </li>
+        
+          <li>
+            <a href="/2025/09/15/Ed-H-Chi-The-Future-of-Personalized-Universal-Assistant/">Ed H. Chi: The Future of Personalized Universal Assistant</a>
+          </li>
+        
+          <li>
+            <a href="/2025/08/09/fix-iterm2-inactive-pane-gray-overlay-macos/">Fixing iTerm2 Gray Overlay on Inactive Panes in macOS（解決 macOS iTerm2 非活動視窗灰色蒙層問題）</a>
+          </li>
+        
+          <li>
+            <a href="/2025/08/09/fix-iterm2-inactive-pane-gray-overlay-macos-en/">Fixing iTerm2 Gray Overlay on Inactive Panes in macOS</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 ZoneTwelve<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
