@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://zonetwelve.io/2025/09/18/VoxCPM-A-New-Era-in-Speech-Generation/voxcpm.png">
 <meta property="article:published_time" content="2025-09-18T14:53:55.000Z">
-<meta property="article:modified_time" content="2025-09-18T15:12:41.884Z">
+<meta property="article:modified_time" content="2025-09-18T15:14:36.261Z">
 <meta property="article:author" content="ZoneTwelve">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="VoiceCloning">
@@ -71,10 +71,10 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://zonetwelve.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://zonetwelve.io"></form>
       </div>
     </div>
   </div>
@@ -120,20 +120,14 @@
 <li><strong>雙語支援</strong>: 模型完美支援<strong>中文</strong>與<strong>英文</strong>，對於需要製作跨語言內容的創作者來說是一大福音。</li>
 <li><strong>零樣本聲音複製 (Zero-Shot Voice Cloning)</strong>: 這是最神奇的部分！你只需要提供一小段目標聲音的音檔（甚至幾秒鐘就夠了），VoxCPM 就能模仿該聲音的音色、風格和情感來說出你指定的任何文字。</li>
 </ul>
-<h4 id="VoxCPM-操作指南-Hugging-Face-Demo"><a href="#VoxCPM-操作指南-Hugging-Face-Demo" class="headerlink" title="VoxCPM 操作指南 (Hugging Face Demo)"></a>VoxCPM 操作指南 (Hugging Face Demo)</h4><p>對於初學者來說，最簡單的體驗方式就是使用官方在 Hugging Face 上提供的 Demo。</p>
-<h5 id="1-進入-Demo-頁面"><a href="#1-進入-Demo-頁面" class="headerlink" title="1. 進入 Demo 頁面"></a><strong>1. 進入 Demo 頁面</strong></h5><p>首先，打開 <a target="_blank" rel="noopener" href="https://huggingface.co/spaces/openbmb/VoxCPM-Demo">VoxCPM 的 Hugging Face Space</a> 頁面。你會看到如下的操作介面：</p>
-<h5 id="2-上傳參考聲音-Prompt-Audio"><a href="#2-上傳參考聲音-Prompt-Audio" class="headerlink" title="2. 上傳參考聲音 (Prompt Audio)"></a><strong>2. 上傳參考聲音 (Prompt Audio)</strong></h5><p>在左手邊的 <code>Prompt Audio</code> 區塊，你可以上傳一段你想要複製的聲音。這段音檔不需要很長，3 到 10 秒就非常足夠了。</p>
-<h5 id="3-輸入參考聲音的逐字稿-Prompt-Text"><a href="#3-輸入參考聲音的逐字稿-Prompt-Text" class="headerlink" title="3. 輸入參考聲音的逐字稿 (Prompt Text)"></a><strong>3. 輸入參考聲音的逐字稿 (Prompt Text)</strong></h5><p>這個步驟很重要！你必須在 <code>Prompt Text</code> 欄位中，一字不差地打出你剛剛上傳音檔裡的人說了些什麼。這是為了讓 AI 能準確地「校準」聲音和文字的對應關係。</p>
-<h5 id="4-輸入你希望-AI-說出的新句子-Target-Text"><a href="#4-輸入你希望-AI-說出的新句子-Target-Text" class="headerlink" title="4. 輸入你希望 AI 說出的新句子 (Target Text)"></a><strong>4. 輸入你希望 AI 說出的新句子 (Target Text)</strong></h5><p>現在，在 <code>Target Text</code> 欄位中，輸入你希望 AI 用剛剛的聲音說出來的新內容。</p>
-<h5 id="5-產生聲音！"><a href="#5-產生聲音！" class="headerlink" title="5. 產生聲音！"></a><strong>5. 產生聲音！</strong></h5><p>最後，按下 <code>Submit</code> 按鈕，稍等片刻，你就能在右側的 <code>Output Audio</code> 區塊聽到 AI 生成的結果了！是不是非常簡單？</p>
-<h4 id="RAG-實戰-Demo"><a href="#RAG-實戰-Demo" class="headerlink" title="RAG 實戰 Demo"></a>RAG 實戰 Demo</h4><p>接下來，我們實際測試看看它的效果！</p>
-<p>假設我們上傳了一段新聞主播的播報音檔，內容是「今天天氣晴朗，萬里無雲」。</p>
-<ol>
-<li> <strong>Prompt Audio</strong>: 上傳該段音檔。</li>
-<li> <strong>Prompt Text</strong>: 輸入「今天天氣晴朗，萬里無雲」。</li>
-<li> <strong>Target Text</strong>: 輸入「VoxCPM 是一個非常強大的開源語音模型」。</li>
-</ol>
-<p>按下 <code>Submit</code> 後，我們就能聽到 AI 模仿新聞主播的口吻和聲音，流暢地念出「VoxCPM 是一個非常強大的開源語音模型」。效果實在太驚人了！</p>
+<p>好的，這是一份根據您提供的最新操作說明改寫後的文章，風格更為簡潔、清晰，並同時提供繁體中文與英文版本。</p>
+<hr>
+<h3 id="VoxCPM-操作指南-Hugging-Face-Demo"><a href="#VoxCPM-操作指南-Hugging-Face-Demo" class="headerlink" title="VoxCPM 操作指南 (Hugging Face Demo)"></a>VoxCPM 操作指南 (Hugging Face Demo)</h3><p>體驗 VoxCPM 最簡單直接的方式，就是透過官方在 Hugging Face 上提供的線上 Demo。以下是操作步驟：</p>
+<h4 id="1-進入-Demo-頁面"><a href="#1-進入-Demo-頁面" class="headerlink" title="1. 進入 Demo 頁面"></a><strong>1. 進入 Demo 頁面</strong></h4><p>首先，請開啟瀏覽器並前往 <a target="_blank" rel="noopener" href="https://huggingface.co/spaces/openbmb/VoxCPM-Demo">VoxCPM 的 Hugging Face Space</a>。</p>
+<h4 id="2-提供參考聲音（可選）"><a href="#2-提供參考聲音（可選）" class="headerlink" title="2. 提供參考聲音（可選）"></a><strong>2. 提供參考聲音（可選）</strong></h4><p>此步驟為非必要，但若您想複製特定的聲音，請在左側的 <strong><code>Provide a Voice Prompt</code></strong> 區塊上傳或錄製一段音檔。這段音檔將作為聲音合成的音色、語調和情感參考。建議長度為 3 至 10 秒。</p>
+<h4 id="3-輸入參考文本（可選）"><a href="#3-輸入參考文本（可選）" class="headerlink" title="3. 輸入參考文本（可選）"></a><strong>3. 輸入參考文本（可選）</strong></h4><p>如果您上傳了參考聲音，請在 <strong><code>Enter prompt text</code></strong> 欄位中輸入對應的逐字稿。這能幫助模型更精準地學習聲音特徵。此欄位也支援自動語音辨識功能。</p>
+<h4 id="4-輸入目標文本"><a href="#4-輸入目標文本" class="headerlink" title="4. 輸入目標文本"></a><strong>4. 輸入目標文本</strong></h4><p>在 <strong><code>Enter target text</code></strong> 欄位中，輸入您希望模型朗讀的文字內容。</p>
+<h4 id="5-生成語音"><a href="#5-生成語音" class="headerlink" title="5. 生成語音"></a><strong>5. 生成語音</strong></h4><p>點擊 <strong><code>Generate</code></strong> 按鈕，稍待片刻，即可在右側的 <strong><code>Output Audio</code></strong> 區塊聆聽或下載生成結果。</p>
 <h4 id="它與其他模型的比較"><a href="#它與其他模型的比較" class="headerlink" title="它與其他模型的比較"></a>它與其他模型的比較</h4><ul>
 <li><strong>vs. ElevenLabs</strong>: ElevenLabs 是目前業界最頂尖的商業語音 AI，品質極高但需要付費。VoxCPM 作為一個開源模型，在品質上已經能與之較量，最大的優勢就是<strong>免費</strong>和<strong>高度客製化</strong>的潛力。</li>
 <li><strong>vs. VALL-E</strong>: 微軟的 VALL-E 同樣是個強大的聲音複製模型，但目前仍以學術研究為主，普通用戶很難接觸到。VoxCPM 則是完全開放給社群使用，讓 AI 民主化更進一步。</li>
@@ -142,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zonetwelve.io/2025/09/18/VoxCPM-A-New-Era-in-Speech-Generation/" data-id="cmfpjfu4k0000xgit80andmn9" data-title="聲音的魔法師！任何人都能用的 AI 語音複製工具 (Part 1. VoxCPM 介紹與實戰)" class="article-share-link">Teilen</a>
+      <a data-url="https://zonetwelve.io/2025/09/18/VoxCPM-A-New-Era-in-Speech-Generation/" data-id="cmfpjfu4k0000xgit80andmn9" data-title="聲音的魔法師！任何人都能用的 AI 語音複製工具 (Part 1. VoxCPM 介紹與實戰)" class="article-share-link">Share</a>
       
       
       
@@ -156,7 +150,7 @@
   
   
     <a href="/2025/09/17/Benchmarking-VLM-on-Apple-Silicon-M2-vs-M4-MPS-Backend/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Älter</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">🔥 M4 Crushes M2: Apple Silicon VLM Benchmark Shows Up to 5× Speed Boost!</div>
     </a>
   
@@ -194,7 +188,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/09/">九月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">八月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li></ul>
     </div>
@@ -204,7 +198,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
