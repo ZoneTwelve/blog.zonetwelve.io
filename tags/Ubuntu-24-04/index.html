@@ -4,22 +4,14 @@
   <meta charset="utf-8">
   
   
-  <title>Keychron 在 Linux 的 Function key (F鍵) 無法使用 | ZoneTwelve Dev</title>
+  <title>Tag: Ubuntu 24.04 | ZoneTwelve Dev</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Linux 下的 Keychron市面上的鍵盤多到沒辦法只用一個購物清單就全部買下，所以我呢，折衷選擇了同學想賣的二手 Keychron，免運又有折扣。 但是在開始使用的情況下發現了一個奇妙的問題，Linux 下的 Keychron K2 卻沒有預設將 function keys (F1-F12) 當做原先的 F 鍵。 害得我 Refresh 都要摸摸觸控版才能完成一個按鍵的動作。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Keychron 在 Linux 的 Function key (F鍵) 無法使用">
-<meta property="og:url" content="https://zonetwelve.io/2022/11/14/keychron-on-linux/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="ZoneTwelve Dev">
+<meta property="og:url" content="https://zonetwelve.io/tags/Ubuntu-24-04/index.html">
 <meta property="og:site_name" content="ZoneTwelve Dev">
-<meta property="og:description" content="Linux 下的 Keychron市面上的鍵盤多到沒辦法只用一個購物清單就全部買下，所以我呢，折衷選擇了同學想賣的二手 Keychron，免運又有折扣。 但是在開始使用的情況下發現了一個奇妙的問題，Linux 下的 Keychron K2 卻沒有預設將 function keys (F1-F12) 當做原先的 F 鍵。 害得我 Refresh 都要摸摸觸控版才能完成一個按鍵的動作。">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2022-11-14T07:29:42.000Z">
-<meta property="article:modified_time" content="2025-08-09T01:39:54.684Z">
 <meta property="article:author" content="ZoneTwelve">
-<meta property="article:tag" content="Linux">
-<meta property="article:tag" content="Keychron">
-<meta property="article:tag" content="Function key">
-<meta property="article:tag" content="fix">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="ZoneTwelve Dev" type="application/atom+xml">
@@ -77,84 +69,39 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-keychron-on-linux" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/11/14/keychron-on-linux/" class="article-date">
-  <time class="dt-published" datetime="2022-11-14T07:29:42.000Z" itemprop="datePublished">2022-11-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="p-name article-title" itemprop="headline name">
-      Keychron 在 Linux 的 Function key (F鍵) 無法使用
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2025" class="archive-year">2025</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2025/09/30/Ubuntu-24-04-Install-Docker-Docker-Compose/" class="archive-article-date">
+  <time class="dt-published" datetime="2025-09-30T05:47:51.000Z" itemprop="datePublished">9月 30</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2025/09/30/Ubuntu-24-04-Install-Docker-Docker-Compose/">Ubuntu 24.04 Install Docker &amp; Docker Compose</a>
     </h1>
   
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Linux-下的-Keychron"><a href="#Linux-下的-Keychron" class="headerlink" title="Linux 下的 Keychron"></a>Linux 下的 Keychron</h1><p>市面上的鍵盤多到沒辦法只用一個購物清單就全部買下，所以我呢，折衷選擇了同學想賣的二手 Keychron，免運又有折扣。</p>
-<p>但是在開始使用的情況下發現了一個奇妙的問題，Linux 下的 <a target="_blank" rel="noopener" href="https://www.keychron.com/products/keychron-k2-wireless-mechanical-keyboard">Keychron K2</a> 卻沒有預設將 function keys (F1-F12) 當做原先的 F 鍵。</p>
-<p>害得我 Refresh 都要摸摸觸控版才能完成一個按鍵的動作。</p>
-<span id="more"></span>
-
-<p>Keychron 支援兩種系統模式，<strong>Windows</strong> 跟 <strong>MacOS</strong>，但兩者都沒辦法成功操作 function keys。</p>
-<p>所以要如何修他呢？</p>
-<ul>
-<li>把模式切到 Windows</li>
-<li>使用 <code>Fn + X + L</code> (維持四秒) 就可以將 function key 切換到 “Function mode” (如果在預設的 Windows 模式下通常不需要這麼做)</li>
-<li><code>echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode</code></li>
-</ul>
-<p>如果完成上述動作，Function key 應該要跟我一樣可以用了, 然後按住 <code>Fn</code> 鍵也可以使用其他的功能鍵。</p>
-<p>要保留這個設定，就需要在 <code>hid_apple</code> 加上一行:</p>
-<p><code>echo &quot;options hid_apple fnmode=0&quot; | sudo tee -a /etc/modprobe.d/hid_apple.conf</code></p>
-<p>這個操作可能需要重建 <strong>initramfs</strong>，如果你跟我一樣用的是 Ubutnu/Arch 就可以使用下面的命令重建。</p>
-<ul>
-<li><strong>Ubuntu:</strong> <code>sudo update-initramfs -u </code></li>
-<li><strong>Arch:</strong> <code>mkinitcpio -P</code></li>
-</ul>
-<p>這樣就完成所有設定啦，請享用您的鍵盤。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zonetwelve.io/2022/11/14/keychron-on-linux/" data-id="cme3ld18l000em0itb8rf1hao" data-title="Keychron 在 Linux 的 Function key (F鍵) 無法使用" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Function-key/" rel="tag">Function key</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Keychron/" rel="tag">Keychron</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fix/" rel="tag">fix</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2023/03/31/how-to-build-you-own-home-lab/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Neuer</strong>
-      <div class="article-nav-title">
-        
-          簡單在家建構雲端伺服器
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2021/08/25/django-development-experience-pt-1/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Älter</strong>
-      <div class="article-nav-title">Django 開發記 Pt.1</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
 
 </section>

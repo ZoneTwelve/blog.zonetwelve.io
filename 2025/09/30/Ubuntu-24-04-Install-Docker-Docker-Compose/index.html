@@ -4,22 +4,21 @@
   <meta charset="utf-8">
   
   
-  <title>Keychron 在 Linux 的 Function key (F鍵) 無法使用 | ZoneTwelve Dev</title>
+  <title>Ubuntu 24.04 Install Docker &amp; Docker Compose | ZoneTwelve Dev</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Linux 下的 Keychron市面上的鍵盤多到沒辦法只用一個購物清單就全部買下，所以我呢，折衷選擇了同學想賣的二手 Keychron，免運又有折扣。 但是在開始使用的情況下發現了一個奇妙的問題，Linux 下的 Keychron K2 卻沒有預設將 function keys (F1-F12) 當做原先的 F 鍵。 害得我 Refresh 都要摸摸觸控版才能完成一個按鍵的動作。">
+  <meta name="description" content="I’m running an Ubuntu 24.04 LTS (Noble) server on an AWS t3.large instance, and I need Docker to manage containers for my applications. In this guide, I’ll walk through the exact steps to install Dock">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Keychron 在 Linux 的 Function key (F鍵) 無法使用">
-<meta property="og:url" content="https://zonetwelve.io/2022/11/14/keychron-on-linux/index.html">
+<meta property="og:title" content="Ubuntu 24.04 Install Docker &amp; Docker Compose">
+<meta property="og:url" content="https://zonetwelve.io/2025/09/30/Ubuntu-24-04-Install-Docker-Docker-Compose/index.html">
 <meta property="og:site_name" content="ZoneTwelve Dev">
-<meta property="og:description" content="Linux 下的 Keychron市面上的鍵盤多到沒辦法只用一個購物清單就全部買下，所以我呢，折衷選擇了同學想賣的二手 Keychron，免運又有折扣。 但是在開始使用的情況下發現了一個奇妙的問題，Linux 下的 Keychron K2 卻沒有預設將 function keys (F1-F12) 當做原先的 F 鍵。 害得我 Refresh 都要摸摸觸控版才能完成一個按鍵的動作。">
+<meta property="og:description" content="I’m running an Ubuntu 24.04 LTS (Noble) server on an AWS t3.large instance, and I need Docker to manage containers for my applications. In this guide, I’ll walk through the exact steps to install Dock">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2022-11-14T07:29:42.000Z">
-<meta property="article:modified_time" content="2025-08-09T01:39:54.684Z">
+<meta property="article:published_time" content="2025-09-30T05:47:51.000Z">
+<meta property="article:modified_time" content="2025-09-30T05:57:49.245Z">
 <meta property="article:author" content="ZoneTwelve">
-<meta property="article:tag" content="Linux">
-<meta property="article:tag" content="Keychron">
-<meta property="article:tag" content="Function key">
-<meta property="article:tag" content="fix">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Docker-Compose">
+<meta property="article:tag" content="Ubuntu 24.04">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="ZoneTwelve Dev" type="application/atom+xml">
@@ -77,10 +76,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-keychron-on-linux" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-Ubuntu-24-04-Install-Docker-Docker-Compose" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2022/11/14/keychron-on-linux/" class="article-date">
-  <time class="dt-published" datetime="2022-11-14T07:29:42.000Z" itemprop="datePublished">2022-11-14</time>
+    <a href="/2025/09/30/Ubuntu-24-04-Install-Docker-Docker-Compose/" class="article-date">
+  <time class="dt-published" datetime="2025-09-30T05:47:51.000Z" itemprop="datePublished">2025-09-30</time>
 </a>
     
   </div>
@@ -91,7 +90,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      Keychron 在 Linux 的 Function key (F鍵) 無法使用
+      Ubuntu 24.04 Install Docker &amp; Docker Compose
     </h1>
   
 
@@ -99,36 +98,76 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="Linux-下的-Keychron"><a href="#Linux-下的-Keychron" class="headerlink" title="Linux 下的 Keychron"></a>Linux 下的 Keychron</h1><p>市面上的鍵盤多到沒辦法只用一個購物清單就全部買下，所以我呢，折衷選擇了同學想賣的二手 Keychron，免運又有折扣。</p>
-<p>但是在開始使用的情況下發現了一個奇妙的問題，Linux 下的 <a target="_blank" rel="noopener" href="https://www.keychron.com/products/keychron-k2-wireless-mechanical-keyboard">Keychron K2</a> 卻沒有預設將 function keys (F1-F12) 當做原先的 F 鍵。</p>
-<p>害得我 Refresh 都要摸摸觸控版才能完成一個按鍵的動作。</p>
-<span id="more"></span>
+        <p>I’m running an <strong>Ubuntu 24.04 LTS (Noble)</strong> server on an <em>AWS t3.large</em> instance, and I need Docker to manage containers for my applications. In this guide, I’ll walk through the exact steps to install Docker and Docker Compose on <em>Ubuntu 24.04</em>, configure it to start on boot, and allow it to run without sudo.</p>
+<h2 id="Update-System"><a href="#Update-System" class="headerlink" title="Update System"></a>Update System</h2><p>Before installing, always update your package lists:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt upgrade -y</span><br><span class="line"><span class="built_in">sudo</span> apt full-upgrade -y</span><br></pre></td></tr></table></figure>
 
-<p>Keychron 支援兩種系統模式，<strong>Windows</strong> 跟 <strong>MacOS</strong>，但兩者都沒辦法成功操作 function keys。</p>
-<p>所以要如何修他呢？</p>
+<hr>
+<h2 id="Add-Docker-Repository-and-Prerequisites"><a href="#Add-Docker-Repository-and-Prerequisites" class="headerlink" title="Add Docker Repository and Prerequisites"></a>Add Docker Repository and Prerequisites</h2><span id="more"></span>
+
+<ol>
+<li><p>Install required packages:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install -y apt-transport-https ca-certificates curl software-properties-common gnupg lsb-release</span><br></pre></td></tr></table></figure></li>
+<li><p>Add Docker’s official GPG key:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \</span><br><span class="line"><span class="built_in">sudo</span> gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</span><br></pre></td></tr></table></figure></li>
+<li><p>Add the Docker repository:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb [arch=<span class="subst">$(dpkg --print-architecture)</span> signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \</span></span><br><span class="line"><span class="string">https://download.docker.com/linux/ubuntu <span class="subst">$(lsb_release -cs)</span> stable&quot;</span> | \</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br></pre></td></tr></table></figure></li>
+<li><p>Update apt index again:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h2 id="Install-Docker"><a href="#Install-Docker" class="headerlink" title="Install Docker"></a>Install Docker</h2><h3 id="Install-Latest-Docker-CE"><a href="#Install-Latest-Docker-CE" class="headerlink" title="Install Latest Docker CE"></a>Install Latest Docker CE</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin</span><br></pre></td></tr></table></figure>
+
+<p>✅ These packages include:</p>
 <ul>
-<li>把模式切到 Windows</li>
-<li>使用 <code>Fn + X + L</code> (維持四秒) 就可以將 function key 切換到 “Function mode” (如果在預設的 Windows 模式下通常不需要這麼做)</li>
-<li><code>echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode</code></li>
+<li><strong>docker-ce</strong> → The Docker engine (daemon).</li>
+<li><strong>docker-ce-cli</strong> → The Docker CLI tool (<code>docker</code>).</li>
+<li><strong>containerd.io</strong> → Container runtime used by Docker.</li>
+<li><strong>docker-compose-plugin</strong> → Adds <code>docker compose</code> (modern Compose).</li>
 </ul>
-<p>如果完成上述動作，Function key 應該要跟我一樣可以用了, 然後按住 <code>Fn</code> 鍵也可以使用其他的功能鍵。</p>
-<p>要保留這個設定，就需要在 <code>hid_apple</code> 加上一行:</p>
-<p><code>echo &quot;options hid_apple fnmode=0&quot; | sudo tee -a /etc/modprobe.d/hid_apple.conf</code></p>
-<p>這個操作可能需要重建 <strong>initramfs</strong>，如果你跟我一樣用的是 Ubutnu/Arch 就可以使用下面的命令重建。</p>
-<ul>
-<li><strong>Ubuntu:</strong> <code>sudo update-initramfs -u </code></li>
-<li><strong>Arch:</strong> <code>mkinitcpio -P</code></li>
-</ul>
-<p>這樣就完成所有設定啦，請享用您的鍵盤。</p>
+<hr>
+<h3 id="Optional-Install-a-Specific-Version"><a href="#Optional-Install-a-Specific-Version" class="headerlink" title="(Optional) Install a Specific Version"></a>(Optional) Install a Specific Version</h3><p>List available versions:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-cache madison docker-ce</span><br></pre></td></tr></table></figure>
+
+<p>Install a specific version (replace version strings as needed):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install docker-ce=&lt;VERSION_STRING&gt; docker-ce-cli=&lt;VERSION_STRING&gt; containerd.io</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Enable-amp-Start-Docker"><a href="#Enable-amp-Start-Docker" class="headerlink" title="Enable &amp; Start Docker"></a>Enable &amp; Start Docker</h2><p>Check Docker status:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status docker</span><br></pre></td></tr></table></figure>
+
+<p>If not running, enable and start:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> docker</span><br><span class="line"><span class="built_in">sudo</span> systemctl start docker</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Run-Docker-Without-sudo"><a href="#Run-Docker-Without-sudo" class="headerlink" title="Run Docker Without sudo"></a>Run Docker Without <code>sudo</code></h2><p>To avoid typing <code>sudo</code> with every Docker command, add your user to the <code>docker</code> group:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> usermod -aG docker <span class="variable">$USER</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>⚠️ Log out and back in (or reboot) for the group change to take effect.</p>
+</blockquote>
+<p>Test:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br><span class="line">docker --version</span><br></pre></td></tr></table></figure>
+
+<p>Example:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Docker version 28.4.0, build d8eb465</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Install-Standalone-Docker-Compose-Optional"><a href="#Install-Standalone-Docker-Compose-Optional" class="headerlink" title="Install Standalone Docker Compose (Optional)"></a>Install Standalone Docker Compose (Optional)</h2><p>If you want the <strong>standalone <code>docker-compose</code> binary</strong> in addition to <code>docker compose</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> curl -L <span class="string">&quot;https://github.com/docker/compose/releases/download/v2.28.1/docker-compose-<span class="subst">$(uname -s)</span>-<span class="subst">$(uname -m)</span>&quot;</span> \</span><br><span class="line">-o /usr/local/bin/docker-compose</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<p>Check version:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose --version</span><br><span class="line"><span class="comment"># Docker version 28.4.0, build d8eb465</span></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zonetwelve.io/2022/11/14/keychron-on-linux/" data-id="cme3ld18l000em0itb8rf1hao" data-title="Keychron 在 Linux 的 Function key (F鍵) 無法使用" class="article-share-link">Teilen</a>
+      <a data-url="https://zonetwelve.io/2025/09/30/Ubuntu-24-04-Install-Docker-Docker-Compose/" data-id="cmg656l680000qnit7p2rgp8r" data-title="Ubuntu 24.04 Install Docker &amp; Docker Compose" class="article-share-link">Teilen</a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Function-key/" rel="tag">Function key</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Keychron/" rel="tag">Keychron</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fix/" rel="tag">fix</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker-Compose/" rel="tag">Docker-Compose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu-24-04/" rel="tag">Ubuntu 24.04</a></li></ul>
 
     </footer>
   </div>
@@ -136,19 +175,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2023/03/31/how-to-build-you-own-home-lab/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Neuer</strong>
-      <div class="article-nav-title">
-        
-          簡單在家建構雲端伺服器
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/08/25/django-development-experience-pt-1/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2025/09/25/Ubuntu-22-04-Install-Docker-Docker-Compose/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Älter</strong>
-      <div class="article-nav-title">Django 開發記 Pt.1</div>
+      <div class="article-nav-title">Ubuntu 22.04 Install Docker &amp; Docker Compose</div>
     </a>
   
 </nav>
